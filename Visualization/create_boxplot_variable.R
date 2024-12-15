@@ -25,7 +25,7 @@ create_boxplot <- function(processed_data_highlighted, condition, variable_of_in
          x = "Time point", 
          y = variable_of_interest) +
     
-    scale_fill_manual(name = "Condition", values = c("SHAM" = "grey", "ORAB" = "coral"),
+    scale_fill_manual(name = "Condition", values = c("SHAM" = "white", "ORAB" = "coral"),
                       labels = c("SHAM" = "SHAM", "ORAB" = "ORAB")) +
     
     scale_color_manual(name = "Sample", values = c("Multiome seq" = "red"), labels = c("RNA sequencing sample")) +
