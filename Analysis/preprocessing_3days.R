@@ -114,32 +114,32 @@ mouse_3d <- merge(Prediction_TP91,
                       Prediction_TP92, 
                       Prediction_TP102, 
                       Prediction_TP111), 
-                  project = "mouse_3d_Full_Merge_Project")
-mouse_3d_normalize <- NormalizeData(mouse_3d, 
+                  project = "mouse_3d_full_merge_project")
+mouse_3d <- NormalizeData(mouse_3d, 
                                     normalization.method = "LogNormalize", 
                                     scale.factor = 10000)
-mouse_3d_find_features <- FindVariableFeatures(mouse_3d_normalize)
-mouse_3d_scale <- ScaleData(mouse_3d_find_features)
-mouse_3d_pca <- RunPCA(mouse_3d_scale, npcs = 20)
-mouse_3d_umap <- RunUMAP(mouse_3d_pca, dims = 1:20)
+mouse_3d <- FindVariableFeatures(mouse_3d)
+mouse_3d <- ScaleData(mouse_3d)
+mouse_3d <- RunPCA(mouse_3d, npcs = 20)
+mouse_3d <- RunUMAP(mouse_3d, dims = 1:20)
 
-mouse_3d_integrate <- IntegrateLayers(object = mouse_3d_umap, 
+mouse_3d <- IntegrateLayers(object = mouse_3d_umap, 
                             method = RPCAIntegration, 
                             orig.reduction = "pca", 
                             new.reduction = "integrated.rpca",
                             verbose = FALSE)
-mouse_3d_join_layers <- JoinLayers(mouse_3d_integrate)
+mouse_3d <- JoinLayers(mouse_3d)
 
 
 # Save Seurat object
-SaveH5Seurat(mouse_3d_join_layers, 
-             file = "mouse_3d_join_layers.h5seurat", 
+SaveH5Seurat(mouse_3d, 
+             file = "mouse_3d.h5seurat", 
              overwrite = TRUE, 
              verbose = TRUE)
 
 
 ## Filter for ventricular cardiomyocytes?
-mouse_3d_vcm <- subset(mouse_3d_join_layers, 
+mouse_3d_vcm <- subset(mouse_3d, 
                           predicted.celltype.l2.score >= 0.7 & 
                             mapping.score >= 0.7 & 
                             predicted.celltype.l1.score >= 0.7 & 
@@ -171,10 +171,10 @@ mouse_3d_vcm_markers_significant_genes <- mouse_3d_vcm_markers %>%
   arrange(desc(abs(avg_log2FC)))
 write.xlsx(mouse_3d_vcm_markers_significant_genes, file = "mouse_3d_vcm_markers_significant_genes.xlsx") # Save data frame as excel
 
-# Filter for top 200 significant genes
-mouse_3d_vcm_markers_significant_genes_top_200 <- mouse_3d_vcm_markers %>%
-  dplyr::filter(p_val_adj < 0.05) %>%
-  arrange(desc(abs(avg_log2FC))) %>%
-  head(200)
-write.xlsx(mouse_3d_vcm_markers_significant_genes_top_200, file = "mouse_3d_vcm_markers_significant_genes_top_200.xlsx") # Save data frame as excel
-
+# # Filter for top 200 significant genes
+# mouse_3d_vcm_markers_significant_genes_top_200 <- mouse_3d_vcm_markers %>%
+#   dplyr::filter(p_val_adj < 0.05) %>%
+#   arrange(desc(abs(avg_log2FC))) %>%
+#   head(200)
+# write.xlsx(mouse_3d_vcm_markers_significant_genes_top_200, file = "mouse_3d_vcm_markers_significant_genes_top_200.xlsx") # Save data frame as excel
+# 

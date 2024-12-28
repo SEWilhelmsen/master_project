@@ -77,7 +77,10 @@ generate_plot <- function(summary_data, significance_data, go_process_of_interes
     dplyr::select(time_point, group1, group2, p_value, significance, y.position)
   
   summary_data$time_point <- factor(summary_data$time_point,
-                                    levels = c("3 Days",
+                                    levels = c("6 Hours",
+                                               "12 Hours",
+                                               "1 Day",
+                                               "3 Days",
                                                "1 week",
                                                "3 Weeks"))
   

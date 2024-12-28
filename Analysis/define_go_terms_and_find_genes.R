@@ -23,7 +23,11 @@ define_go_process <- list(
   monosaccharide_transmembrane_transport = "GO:1905950", 
   protein_transmembrane_transport = "GO:0071806",
   dna_binding_transcription_factor_activity = "GO:0003700",
-  translation_regulatory_activity = "GO:0045182"
+  translation_regulatory_activity = "GO:0045182",
+  ketone_metabolic_process = "GO:0042180",
+  hydroxybutyrate_dehydrogenase_activity = "GO:0003858",
+  regulation_of_ketone_metabolic_process = "GO:0010565",
+  ketone_catabolism = "GO:0046952"
 )
 
 # Function to retrieve genes for a GO term

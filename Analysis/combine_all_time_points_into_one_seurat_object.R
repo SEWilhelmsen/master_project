@@ -4,16 +4,26 @@
 # Load necessary libraries
 library(Seurat)
 library(SeuratData)
+library(SeuratDisk)
 library(ggplot2)
 library(patchwork)
 
 # Load individual Seurat objects
-mouse_vcm_6h <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_6h.Rds")
-mouse_vcm_12h <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_12h.Rds")
-mouse_vcm_1d <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1d.Rds")
-mouse_vcm_3d <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3d.Rds")
-mouse_vcm_1w <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1w.Rds")
-mouse_vcm_3w <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3w.Rds")
+# mouse_vcm_6h <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_6h_vcm.Rds")
+# mouse_vcm_12h <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_12h_vcm.Rds")
+# mouse_vcm_1d <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_1d_vcm.Rds")
+# mouse_vcm_3d <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3d.Rds")
+# mouse_vcm_1w <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1w.Rds")
+# mouse_vcm_3w <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3w.Rds")
+
+# If already in the environment
+mouse_vcm_6h <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_6h_vcm.Rds")
+mouse_vcm_12h <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_12h_vcm.Rds")
+mouse_vcm_1d <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_1d_vcm.Rds")
+mouse_vcm_3d <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_3d.Rds")
+mouse_vcm_1w <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_1w.Rds")
+mouse_vcm_3w <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_3w.Rds")
+
 
 # Merge Seurat objects
 mouse_vcm_all_time_points <- merge(mouse_vcm_6h, 
@@ -24,12 +34,41 @@ mouse_vcm_all_time_points <- merge(mouse_vcm_6h,
                                             mouse_vcm_3w), 
                                    project = "mouse_full_merge_project", 
                                    merge.data = TRUE)
-
 mouse_vcm_all_time_points <- NormalizeData(mouse_vcm_all_time_points, normalization.method = "LogNormalize", scale.factor = 10000)
 mouse_vcm_all_time_points <- FindVariableFeatures(mouse_vcm_all_time_points)
 mouse_vcm_all_time_points <- ScaleData(mouse_vcm_all_time_points)
 mouse_vcm_all_time_points <- RunPCA(mouse_vcm_all_time_points, npcs = 20)
 mouse_vcm_all_time_points <- RunUMAP(mouse_vcm_all_time_points, dims = 1:20)
+
+
+# Save Seurat object in h5Seurat format
+SaveH5Seurat(mouse_vcm_all_time_points, filename = "C:/Users/Labuser/snRNAseq/tmp/mouse_all_time_points.h5seurat", overwrite = TRUE)
+
+# Save Seurat object in .Rds format
+saveRDS(mouse_vcm_all_time_points, "C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_all_time_points.Rds")
+
+
+
+mouse_vcm_all_time_points <- IntegrateLayers(object = mouse_vcm_all_time_points, 
+                                              method = RPCAIntegration, 
+                                              orig.reduction = "pca", 
+                                              new.reduction = "integrated.rpca",
+                                              verbose = FALSE)
+mouse_vcm_all_time_points_join_layers <- JoinLayers(mouse_vcm_all_time_points)
+                                             
+# Save Seurat object in h5Seurat format
+SaveH5Seurat(mouse_vcm_all_time_points_join_layers, filename = "C:/Users/Labuser/snRNAseq/tmp/mouse_all_time_points_join_layers.h5seurat", overwrite = TRUE)
+
+# Save Seurat object in .Rds format
+saveRDS(mouse_vcm_all_time_points_join_layers, "C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_all_time_points_join_layers.Rds")
+
+
+# Create UMAP plot
+dimplot_umap <- DimPlot(mouse_vcm_all_time_points, reduction = "umap", label = TRUE) + 
+  ggtitle("UMAP Plot") +
+  theme_minimal()  
+
+print(dimplot_umap)
 
 # If you intended to integrate using RPCA, follow this approach:
 # 1. Split object by original identity (time points in this example)
@@ -107,43 +146,45 @@ dimplot_umap <- DimPlot(mouse_vcm_all_time_points, reduction = "umap", group.by 
 # library(SeuratData)
 # library(ggplot2)
 # library(patchwork)
-# 
-# 
-# 
-# mouse_vcm_6h <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_6h.Rds")
-# mouse_vcm_12h <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_12h.Rds")
-# mouse_vcm_1d <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1d.Rds")
-# mouse_vcm_3d <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3d.Rds")
-# mouse_vcm_1w <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1w.Rds")
-# mouse_vcm_3w <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3w.Rds")
-# 
-# 
-# mouse_vcm_all_time_points <- merge(mouse_vcm_6h, 
-#                                    y = c(mouse_vcm_12h, 
-#                                          mouse_vcm_1d, 
-#                                          mouse_vcm_3d, 
-#                                          mouse_vcm_1w, 
-#                                          mouse_vcm_3w), 
-#                                    project = "mouse_full_merge_project", 
-#                                    merge.data = TRUE)
-# 
-# mouse_vcm_all_time_points <- NormalizeData(mouse_vcm_all_time_points, 
-#                                            normalization.method = "LogNormalize", 
-#                                            scale.factor = 10000)
-# mouse_vcm_all_time_points <- FindVariableFeatures(mouse_vcm_all_time_points)
-# mouse_vcm_all_time_points <- ScaleData(mouse_vcm_all_time_points)
-# mouse_vcm_all_time_points <- RunPCA(mouse_vcm_all_time_points, npcs = 20)
-# mouse_vcm_all_time_points <- RunUMAP(mouse_vcm_all_time_points, dims = 1:20)
-# mouse_vcm_all_time_points <- IntegrateLayers(object = mouse_vcm_all_time_points, 
-#                                              method = RPCAIntegration, 
-#                                              orig.reduction = "pca", 
-#                                              new.reduction = "integrated.rpca",
-#                                              verbose = FALSE)
-# mouse_vcm_all_time_points_join_layers <- JoinLayers(mouse_vcm_all_time_points)
-# 
-# SaveH5Seurat(mouse_vcm_all_time_points_join_layers, 
-#              filename = "mouse_all_time_points_join_layers.h5seurat", 
-#              overwrite = TRUE)
-# 
-# saveRDS(mouse_vcm_all_time_points_join_layers, 
-#         file.path("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_all_time_points_join_layers.Rds"))
+
+
+options(future.globals.maxSize = 48 * 1024^3)  # Setting max size to 48 GiB in case of error due to size.
+
+mouse_6h <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_6h.Rds")
+mouse_12h <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_12h.Rds")
+mouse_1d <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_1d.Rds")
+mouse_3d <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_3d.Rds")
+mouse_1w <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_1w.Rds")
+mouse_3w <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_3w.Rds")
+
+
+mouse_all_time_points <- merge(mouse_6h,
+                                y = c(mouse_12h,
+                                     mouse_1d,
+                                     mouse_3d,
+                                     mouse_1w,
+                                     mouse_3w),
+                                project = "mouse_full_merge_project",
+                                merge.data = TRUE)
+
+mouse_all_time_points <- NormalizeData(mouse_all_time_points,
+                                           normalization.method = "LogNormalize",
+                                           scale.factor = 10000)
+mouse_all_time_points <- FindVariableFeatures(mouse_all_time_points)
+mouse_all_time_points <- ScaleData(mouse_all_time_points)
+mouse_all_time_points <- RunPCA(mouse_all_time_points, npcs = 20)
+mouse_all_time_points <- RunUMAP(mouse_all_time_points, dims = 1:20)
+mouse_all_time_points <- IntegrateLayers(object = mouse_all_time_points,
+                                             method = RPCAIntegration,
+                                             orig.reduction = "pca",
+                                             new.reduction = "integrated.rpca",
+                                             verbose = FALSE)
+
+
+mouse_all_time_points_join_layers <- JoinLayers(mouse_all_time_points)
+
+SaveH5Seurat(mouse_all_time_points_join_layers,
+             filename = "mouse_all_time_points_join_layers.h5seurat",
+             overwrite = TRUE)
+
+saveRDS(mouse_all_time_points_join_layers, file = "C:/Users/Labuser/snRNAseq/tmp/mouse_all_time_points_join_layers.Rds")

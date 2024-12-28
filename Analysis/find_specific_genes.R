@@ -34,7 +34,11 @@ gene_list <- list(
   chylomicron_clearance = toupper(c("APOC1", "APOC2", "APOC3", "APOE", "LIPC", "GPIHBP")),
   uncoupling_proteins = toupper(c("SLC25A4", "SLC25A5", "UCP1", "UCP2", "UCP3")),
   fatty_acid_transport = toupper(c("FABP3", "FABPH", "CD36", "FATP4", "CACP", "MCAT")),
-  b_oxidation = toupper(c("CPT1B", "CPT1A", "ACADVL", "CPT2"))
+  b_oxidation = toupper(c("CPT1B", "CPT1A", "ACADVL", "CPT2")),
+  regulation_of_ketone_metabolic_process = toupper(c("AVP", "SLC45A3", "PLIN5")),
+  hydroxybutyrate_dehydrogenase_activity = toupper(c("BDH1", "BDH2")),
+  ketone_catabolism = toupper(c("ACAT1", "OXCT1", "OXCT2", "OXCT2A", "OXCT2B")),
+  stress_markers = toupper(c("NPPA", "NPPB", "MYH7"))
 )
 
 specific_genes <- unique(unlist(gene_list))

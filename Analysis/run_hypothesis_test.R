@@ -9,13 +9,13 @@
 # Source necessary files
 source("C:/Users/siljeew/snRNAseq/Analysis/load_libraries_hypothesis_testing.R")
 source("C:/Users/siljeew/snRNAseq/Analysis/extract_and_clean_data_from_animal_overview.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/shapiro_wilks_test.R")
+source("C:/Users/siljeew/snRNAseq/Analysis/perform_shapiro_wilks_test.R")
 source("C:/Users/siljeew/snRNAseq/Visualization/create_qqplot_histogram_variable.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/kruskal_wallis_test.R")
-#source("C:/Users/siljeew/snRNAseq/Analysis/mann_whitney_test.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/t_test.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/welch_test.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/anova_tukey.R")
+source("C:/Users/siljeew/snRNAseq/Analysis/perform_kruskal_wallis_test.R")
+#source("C:/Users/siljeew/snRNAseq/Analysis/perform_mann_whitney_test.R")
+source("C:/Users/siljeew/snRNAseq/Analysis/perform_t_test.R")
+source("C:/Users/siljeew/snRNAseq/Analysis/perform_welch_test.R")
+source("C:/Users/siljeew/snRNAseq/Analysis/perform_anova_tukey.R")
 
 
 

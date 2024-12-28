@@ -29,11 +29,12 @@ source("C:/Users/siljeew/snRNAseq/Visualization/create_plot_for_specific_genes_f
 library(cowplot)
 library(tibble)
 library(SeuratObject)
+library(tidyverse)
 
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'tca'
+go_process_of_interest <- 'hydroxybutyrate_dehydrogenase_activity'
 output_dir_plot <- "C:/Users/siljeew/snRNAseq/Plots"
 
 # Ensure output plot directory exists
@@ -43,9 +44,9 @@ if (!dir.exists(output_dir_plot)) {
 
 # Define file paths for Seurat objects
 file_paths <- list(
-  # "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_6h.Rds",
-  # "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_12h.Rds",
-  # "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1d.Rds",
+  "C:/Users/siljeew/snRNAseq/tmp/mouse_6h_vcm.Rds",
+  "C:/Users/siljeew/snRNAseq/tmp/mouse_12h_vcm.Rds",
+  "C:/Users/siljeew/snRNAseq/tmp/mouse_1d_vcm.Rds",
   "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3d.Rds",
   "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1w.Rds",
   "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3w.Rds"
@@ -121,6 +122,8 @@ go_process_summary <- go_process_aggregated %>%
 go_process_summary$time_point <- factor(go_process_summary$time_point, levels = unique(go_process_summary$time_point))
 go_process_summary$condition <- factor(go_process_summary$condition, levels = c("SHAM", "AB"))
 
+View(go_process_summary)
+View(p_values_for_plot)
 
 ### Generate and save process plot
 #########################################################################
@@ -136,6 +139,12 @@ ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_levels_over_ti
 # Set parameters 
 file_path_to_data_avg_log2fc <- "C:/Users/siljeew/snRNAseq/Data/mouse_vcm_all_genes_avg_log2fc.csv"
 
+data_avg_log2fc <- read_csv2(file_path_to_data_avg_log2fc)
+
+# Rename the first column using its position
+colnames(data_avg_log2fc)[1] <- "gene"
+#View(data_avg_log2fc)
+
 
 # Subset the data to include only the process genes
 go_process_of_interest_genes <- gene_list[[go_process_of_interest]]
@@ -146,13 +155,9 @@ if (is.null(go_process_of_interest_genes)) {
 }
 print(go_process_of_interest_genes)
 
+
 # Validate if the genes are present in the dataset
-# data <- read.csv(file_path_to_data_avg_log2fc)
-# genes_of_interest <- go_process_of_interest_genes
-
-data <- read.csv(file_path_to_data_avg_log2fc)
-
-genes_in_data <- go_process_of_interest_genes %in% data$gene
+genes_in_data <- go_process_of_interest_genes %in% data_avg_log2fc$gene
 if (!all(genes_in_data)) {
   missing_genes <- go_process_of_interest_genes[!genes_in_data]
   stop(paste("The following genes are missing in the data:", paste(missing_genes, collapse = ", ")))
@@ -160,7 +165,8 @@ if (!all(genes_in_data)) {
 
 
 # Create plot
-go_genes_plot <- create_go_genes_plot(file_path_to_data_avg_log2fc, go_process_of_interest_genes)
+go_genes_plot <- create_go_genes_plot(data_avg_log2fc, go_process_of_interest_genes)
+print(go_genes_plot)
 ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_genes_expression.png", sep = "")), plot = go_genes_plot, width = 8, height = 6)
 
 

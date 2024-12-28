@@ -1,16 +1,17 @@
 # Create violin plot
 # Silje Wilhelmsen
 
-load_libraries <- function() {
-  library(ggplot2)
-}
+library(ggplot2)
 
 # Function to create violin plot
 create_violin_plot <- function(combined_data_long, condition, gene) {
   
   # Set the correct order 
   combined_data_long$time_point <- factor(combined_data_long$time_point,
-                                    levels = c("3 Days",
+                                    levels = c("6 Hours",
+                                               "12 Hours",
+                                               "1 Day",
+                                               "3 Days",
                                                "1 week",
                                                "3 Weeks"))
   

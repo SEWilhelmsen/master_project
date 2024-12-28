@@ -34,6 +34,9 @@ library(heartref.SeuratData)
 library(openxlsx)
 
 
+# Set parameters
+options(future.globals.maxSize = 5 * 1024^3) # This sets the maximum size to 5 GB. 
+
 
 ## Load the data - 3 sham and 3 AB mice - 3 weeks after ORAB operation
 
@@ -74,7 +77,6 @@ TP62 <- CreateSeuratObject(
   assay = "RNA", project = "3 Weeks - AB"
 )
 
-options(future.globals.maxSize = 5 * 1024^3) # This sets the maximum size to 5 GB. 
 
 ## Annotation of nuclei - Assignment to each nuclei a score on what type of cell type the nucleus comes from
 
@@ -101,12 +103,12 @@ new_rownames_TP511 <- gsub("-1$", "-TP511", rownames_TP511)
 new_rownames_TP62 <- gsub("-1$", "-TP62", rownames_TP62)
 new_rownames_TP513 <- gsub("-1$", "-TP513", rownames_TP513)
 
-colnames(Prediction_TP51) <- new_rownames_TP51
-colnames(Prediction_TP75) <- new_rownames_TP75
-colnames(Prediction_TP52) <- new_rownames_TP52
-colnames(Prediction_TP511) <- new_rownames_TP511
-colnames(Prediction_TP62) <- new_rownames_TP62
-colnames(Prediction_TP513) <- new_rownames_TP513
+colnames(Prediction_TP51)<-new_rownames_TP51
+colnames(Prediction_TP75)<-new_rownames_TP75
+colnames(Prediction_TP52)<-new_rownames_TP52
+colnames(Prediction_TP511)<-new_rownames_TP511
+colnames(Prediction_TP62)<-new_rownames_TP62
+colnames(Prediction_TP513)<-new_rownames_TP513
 
 ## Merge all 6 animals into one Seurat object
 
@@ -129,12 +131,12 @@ mouse_3w <- IntegrateLayers(object = mouse_3w,
                             orig.reduction = "pca", 
                             new.reduction = "integrated.rpca",
                             verbose = FALSE)
-mouse_3w_join_layers <- JoinLayers(mouse_3w)
+mouse_3w <- JoinLayers(mouse_3w)
 
 
 # Save Seurat object
-SaveH5Seurat(mouse_3w_join_layers, 
-             filename = "mouse_3w_join_layers.h5seurat", 
+SaveH5Seurat(mouse_3w, 
+             filename = "mouse_3w.h5seurat", 
              overwrite = TRUE)
 
 

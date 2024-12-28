@@ -21,7 +21,7 @@ processed_data <- process_excel_data(file_path, output_view = TRUE) # run the fu
 View(processed_data) # Check the results
 
 # Define variables of interest and output directory
-variable_of_interest <- "hw"  # Change this to the desired variable
+variable_of_interest <- "LW_(mg)"  # Change this to the desired variable
 output_dir <- "C:/Users/siljeew/snRNAseq/Data"
 output_dir_plot <- "C:/Users/siljeew/snRNAseq/Plots"
 
