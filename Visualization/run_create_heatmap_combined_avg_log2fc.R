@@ -21,7 +21,7 @@ mouse_vcm_all_genes_avg_log2fc <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_v
 head(mouse_vcm_all_genes_avg_log2fc)
 
 # Define go processes of interest
-go_processes_of_interest_for_heatmap <- c('glycolysis')
+go_processes_of_interest_for_heatmap <- c('glycolysis', 'tca')
 
 # Retrieve genes of interest
 genes_of_interest_for_heatmap_vector <- get_genes_of_interest(go_processes_of_interest_for_heatmap, define_go_process, get_genes_for_go_process)
@@ -66,6 +66,3 @@ print(head(go_association_vector))
 ### Create and save heatmap
 #######################################################################
 heatmap_plot <- create_heatmap(heatmap_matrix_numeric, go_association_vector)
-
-# Readable writing of names/legends/text?
-# Sort genes alphabetically after process?

@@ -77,7 +77,7 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
     name = "log2 fold change",
     col = col_fun,
     na_col = "grey",
-    cluster_rows = FALSE, 
+    cluster_rows = TRUE, 
     show_row_names = TRUE,
     row_names_side = "left",
     row_names_gp = gpar(fontsize = 10),
