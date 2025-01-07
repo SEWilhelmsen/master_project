@@ -65,10 +65,23 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
   # Define color function
   col_fun <- colorRamp2(c(-1, 0, 1), c("blue", "white", "red"))
   
-  # Create text annotation with non-empty vector
-  row_annotation <- rowAnnotation(
-    text = anno_text(go_association_vector, gp = gpar(fontsize = 8)),
-    show_annotation_name = FALSE
+  # # Create text annotation with non-empty vector
+  # row_annotation <- rowAnnotation(
+  #   text = anno_text(go_association_vector, gp = gpar(fontsize = 8)),
+  #   show_annotation_name = FALSE
+  # )
+
+  
+  # Define color mapping for processes
+  process_colors <- c(
+    'glycolysis' = "black",
+    'tca' = "green", 
+    "glycolysis,tca" = "purple"
+  )
+  
+  # Define annotations based on the process
+  right_annotation <- rowAnnotation(
+    process = anno_simple(go_association_vector, col = process_colors)
   )
   
   # Create the heatmap
@@ -77,7 +90,7 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
     name = "log2 fold change",
     col = col_fun,
     na_col = "grey",
-    cluster_rows = TRUE, 
+    cluster_rows = FALSE, 
     show_row_names = TRUE,
     row_names_side = "left",
     row_names_gp = gpar(fontsize = 10),
@@ -94,7 +107,7 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
       legend_direction = "vertical",
       legend_height = unit(4, "cm")
     ),
-    right_annotation = row_annotation,  # Use right_annotation for adding text
+    right_annotation = right_annotation,
     gap = unit(1, "mm")
   )
   
