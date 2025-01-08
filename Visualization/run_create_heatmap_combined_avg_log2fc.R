@@ -5,6 +5,7 @@
 ########################################################################
 source("C:/Users/siljeew/snRNAseq/Visualization/load_libraries_run_create_heatmap_combined_avg_log2fc.R")
 source("C:/Users/siljeew/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
+source("C:/Users/siljeew/snRNAseq/Visualization/gene_process_mapping.R")
 source("C:/Users/siljeew/snRNAseq/Visualization/create_heatmap_combined_avg_log2fc.R")
 
 ### Set parameters
