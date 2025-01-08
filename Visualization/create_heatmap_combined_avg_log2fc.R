@@ -118,7 +118,13 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
     legend_gp = gpar(fill = "grey"),
     direction = "vertical"
   )
+  process_legend <- Legend(
+    title = "Process",
+    labels = names(process_colors),
+    legend_gp = gpar(fill = process_colors),
+    direction = "vertical"
+  )
   
-  # Draw the heatmap and stack legends
-  draw(heatmap, annotation_legend_list = list(na_legend), merge_legend = TRUE)
+  # Draw the heatmap and stack all legends
+  draw(heatmap, annotation_legend_list = list(na_legend, process_legend), merge_legend = TRUE)
 }

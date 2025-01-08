@@ -58,11 +58,23 @@ go_association_vector <- sapply(rownames(heatmap_matrix_numeric), function(gene)
   }
 }, USE.NAMES = FALSE)
 
-# Check resulting vector
-print("Processed go_association_vector:")
-print(head(go_association_vector))
+# Define a sorting order
+sorting_order <- factor(go_association_vector, levels = c("glycolysis", "glycolysis,tca", "tca"))
 
+# Order the matrix based on the sorting vector
+ordered_indices <- order(sorting_order)
+
+# Reorder heatmap matrix and process vector
+heatmap_matrix_numeric <- heatmap_matrix_numeric[ordered_indices, ]
+go_association_vector <- go_association_vector[ordered_indices]
+
+# Verify sorting
+print(head(rownames(heatmap_matrix_numeric)))
+print(head(go_association_vector))
 
 ### Create and save heatmap
 #######################################################################
 heatmap_plot <- create_heatmap(heatmap_matrix_numeric, go_association_vector)
+
+ggsave(file.path(output_dir_plot, paste(go_processes_of_interest_for_heatmap, "_heatmap.png", sep = "")), plot = combined_plot, width = 10, height = 7)
+

@@ -5,31 +5,13 @@
 
 # Source necessary scripts
 #########################################################################
+source("C:/Users/siljeew/snRNAseq/Visualization/load_libraries_run_create_barplot_go_process.R")
 source("C:/Users/siljeew/snRNAseq/Visualization/create_barplot_go_process.R")
 source("C:/Users/siljeew/snRNAseq/Analysis/process_seurat_data.R")
 source("C:/Users/siljeew/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
 source("C:/Users/siljeew/snRNAseq/Analysis/t_test_go_process.R")
 source("C:/Users/siljeew/snRNAseq/Analysis/find_specific_genes.R")
 source("C:/Users/siljeew/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
-
-
-### Load libraries 
-#########################################################################
-# library(dplyr)
-# library(tidyr)
-# library(ggplot2)
-# library(ggpubr)
-# library(readr)
-# library(writexl)
-# library(Seurat)
-# library(patchwork)
-# library(reshape2)
-# library(openxlsx)
-
-library(cowplot)
-library(tibble)
-library(SeuratObject)
-library(tidyverse)
 
 
 ### Set parameters 
