@@ -1,7 +1,5 @@
 ### RNA sequencing data SHAM vs. AB - Preprocessing
 ## Timepoint: 12 hours
-## SHAM: 'TP232', 'TP234', 'TP265'
-## AB: 'TP231', 'TP245', 'TP264'
 ## Silje Wilhelmsen
 
 ## Relevant litterature https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.117.030742

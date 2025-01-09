@@ -1,7 +1,5 @@
 ### RNA sequencing data SHAM vs. AB - Preprocessing 
 ## Timepoint: 3 days
-## SHAM: 'TP9-1', 'TP9-5', 'TP11-5'
-## AB: 'TP9-2', 'TP10-2', 'TP11-1A'
 ## Silje Wilhelmsen
 
 

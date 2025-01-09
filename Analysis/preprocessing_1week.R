@@ -1,7 +1,6 @@
 ### RNA sequencing data SHAM vs. AB - Preprocessing
 ## Timepoint: 1 Week
-## SHAM: 'TP3-1', 'TP3-4', 'TP4-1'
-## AB: 'TP2-4', 'TP52-2', 'TP58-4'
+## Silje Wilhelmsen
 
 
 ## Relevant litterature https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.117.030742
