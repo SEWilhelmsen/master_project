@@ -1,4 +1,5 @@
 # Gene mapping for plots
+# Silje Wilhelmsen
 
 # Function to create the gene process mapping
 create_gene_process_mapping <- function(genes_of_interest_for_heatmap_vector) {
