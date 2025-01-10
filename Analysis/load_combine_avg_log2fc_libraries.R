@@ -1,4 +1,4 @@
-## Load libraries for combine_avg_log2fc (*ikke ferdig*)
+## Load libraries for combine_avg_log2fc
 # Silje Wilhelmsen
 
 library(readxl)
