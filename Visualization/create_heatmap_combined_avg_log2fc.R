@@ -82,18 +82,7 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector, proces
     process = anno_simple(go_association_vector, col = process_colors),
     show_annotation_name = FALSE
   )
-  
-  # # Create text annotations for specified ranges
-  # text_annotations <- HeatmapAnnotation(
-  #   text = anno_text(
-  #     x = c(0.5, -0.5), 
-  #     labels = c("Higher expression in ORAB", "Higher expression in SHAM"),
-  #     which = "column"  # Ensuring annotation affects column space
-  #   ),
-  #   annotation_legend_side = "right"
-  # )
-  
-  
+
   # Create the heatmap
   heatmap <- Heatmap(
     heatmap_matrix_numeric, 
@@ -117,10 +106,9 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector, proces
       legend_direction = "vertical",
       legend_height = unit(4, "cm"),
       at = c(-1, -0.5, 0, 0.5, 1),
-      labels = c("Higher expression in ORAB", "Higher expression in SHAM")
+      labels = c("-1", "Higher expression in SHAM",  "0", "Higher expression in ORAB", "1")
     ),
     right_annotation = right_annotation,
-    bottom_annotation = text_annotations,
     gap = unit(1, "mm")
   )
   

@@ -66,8 +66,27 @@ process_colors <- c(
   'tca' = "wheat", 
   "glycolysis,tca" = "wheat4", 
   'pdh' = "slategray2",
-  'glycolysis,pdh' = "thistle3"
+  'glycolysis,pdh' = "thistle3",
+  'fao' = "lightcoral",
+  'etc' = "mistyrose",
+  'chylomicron_clearance' = "pink", 
+  'uncoupling_proteins' = "darkslategray3",
+  'atp_synthesis' = "sienna2",
+  'etc_succinate_to_ubiquinone' = "salmon3",
+  'uncoupling_proteins' = "cornsilk2",
+  'fatty_acid_transport' = "azure3",
+  'b_oxidation' = "aliceblue",
+  'monosaccharide_transmembrane_transport' = "papayawhip", 
+  'protein_transmembrane_transport' = "lemonchiffon",
+  'dna_binding_transcription_factor_activity' = "palegoldenrod",
+  'translation_regulatory_activity' = "lightpink3",
+  'ketone_metabolic_process' = "olivedrab",
+  'hydroxybutyrate_dehydrogenase_activity' = "aquamarine4",
+  'regulation_of_ketone_metabolic_process' = "orange2",
+  'ketone_catabolism' = "rosybrown"
 )
+
+
 
 # Define a sorting order
 sorting_order <- factor(go_association_vector, levels = c("glycolysis", "glycolysis,pdh", "pdh"))
