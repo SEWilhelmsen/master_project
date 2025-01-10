@@ -23,6 +23,9 @@ create_gene_process_mapping <- function(genes_of_interest_for_heatmap_vector) {
 }
 
 
+
+
+
 # Prepare heatmap matrix should consider global variable dependency
 prepare_heatmap_matrix <- function(data, genes_of_interest_for_heatmap_vector) {
   # Ensure both lists are uppercase
@@ -49,8 +52,11 @@ prepare_heatmap_matrix <- function(data, genes_of_interest_for_heatmap_vector) {
 }
 
 
+
+
+
 # Function to create heatmap
-create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
+create_heatmap <- function(heatmap_matrix_numeric, go_association_vector, process_colors) {
   if (!is.matrix(heatmap_matrix_numeric)) {
     stop("Input data must be a matrix.")
   }
@@ -70,19 +76,23 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
   #   text = anno_text(go_association_vector, gp = gpar(fontsize = 8)),
   #   show_annotation_name = FALSE
   # )
-
-  
-  # Define color mapping for processes
-  process_colors <- c(
-    'glycolysis' = "black",
-    'tca' = "green", 
-    "glycolysis,tca" = "purple"
-  )
   
   # Define annotations based on the process
   right_annotation <- rowAnnotation(
-    process = anno_simple(go_association_vector, col = process_colors)
+    process = anno_simple(go_association_vector, col = process_colors),
+    show_annotation_name = FALSE
   )
+  
+  # # Create text annotations for specified ranges
+  # text_annotations <- HeatmapAnnotation(
+  #   text = anno_text(
+  #     x = c(0.5, -0.5), 
+  #     labels = c("Higher expression in ORAB", "Higher expression in SHAM"),
+  #     which = "column"  # Ensuring annotation affects column space
+  #   ),
+  #   annotation_legend_side = "right"
+  # )
+  
   
   # Create the heatmap
   heatmap <- Heatmap(
@@ -105,9 +115,12 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
     heatmap_legend_param = list(
       title = "avg_log2fc",
       legend_direction = "vertical",
-      legend_height = unit(4, "cm")
+      legend_height = unit(4, "cm"),
+      at = c(-1, -0.5, 0, 0.5, 1),
+      labels = c("Higher expression in ORAB", "Higher expression in SHAM")
     ),
     right_annotation = right_annotation,
+    bottom_annotation = text_annotations,
     gap = unit(1, "mm")
   )
   
@@ -118,13 +131,48 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector) {
     legend_gp = gpar(fill = "grey"),
     direction = "vertical"
   )
+  
+  # Filter process_colors to only include those present in go_association_vector
+  present_processes <- unique(go_association_vector)
+  relevant_colors <- process_colors[names(process_colors) %in% present_processes]
+  
   process_legend <- Legend(
     title = "Process",
-    labels = names(process_colors),
-    legend_gp = gpar(fill = process_colors),
+    labels = names(relevant_colors),
+    legend_gp = gpar(fill = relevant_colors),
     direction = "vertical"
   )
   
   # Draw the heatmap and stack all legends
   draw(heatmap, annotation_legend_list = list(na_legend, process_legend), merge_legend = TRUE)
+}
+
+
+
+
+# Function to save a heatmap using ComplexHeatmap and ensure filename reflects processes
+save_heatmap_complex <- function(heatmap, output_dir_plot, processes, file_extension = "png") {
+  # Construct file name
+  combined_name <- paste(processes, collapse = "_")
+  file_path <- file.path(output_dir_plot, paste(combined_name, "_heatmap.", file_extension, sep = ""))
+  
+  # Print file path to verify it is being created correctly
+  print(paste("Saving file to:", file_path))
+  
+  # Open a graphics device, e.g., png
+  if(file_extension == "png") {
+    png(filename = file_path, width = 10, height = 15, units = "in", res = 300, bg = "transparent")
+  } else if (file_extension == "pdf") {
+    pdf(file_path, width = 10, height = 15, bg = "transparent")
+  } else if (file_extension == "tiff") {
+    tiff(filename = file_path, width = 10, height = 15, units = "in", res = 300, bg = "transparent")
+  } else {
+    stop("Unsupported file extension: ", file_extension)
+  }
+  
+  # Render and save the heatmap
+  draw(heatmap)
+  
+  # Close the device
+  dev.off()
 }
