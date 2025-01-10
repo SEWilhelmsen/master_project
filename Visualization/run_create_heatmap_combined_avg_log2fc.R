@@ -10,7 +10,6 @@ source("C:/Users/siljeew/snRNAseq/Visualization/create_heatmap_combined_avg_log2
 
 ### Set parameters
 #######################################################################
-output_dir_plot <- "C:/Users/siljeew/snRNAseq/Plots"
 output_dir_heatmap <- "C:/Users/siljeew/snRNAseq/Plots/Heatmap"
 
 # Ensure the directory exists
@@ -63,7 +62,7 @@ go_association_vector <- sapply(rownames(heatmap_matrix_numeric), function(gene)
 
 # Define color mapping for processes
 process_colors <- c(
-  'glycolysis' = "lightgrey",
+  'glycolysis' = "whitesmoke",
   'tca' = "wheat", 
   "glycolysis,tca" = "wheat4", 
   'pdh' = "slategray2",
@@ -88,9 +87,8 @@ process_colors <- c(
 )
 
 
-
 # Define a sorting order
-sorting_order <- factor(go_association_vector, levels = c("glycolysis", "glycolysis,pdh", "pdh"))
+sorting_order <- factor(go_association_vector, levels = c("glycolysis", "pdh"))
 
 # Order the matrix based on the sorting vector
 ordered_indices <- order(sorting_order)
