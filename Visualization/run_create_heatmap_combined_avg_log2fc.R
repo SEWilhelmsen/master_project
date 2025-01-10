@@ -68,7 +68,7 @@ process_colors <- c(
   'pdh' = "slategray2",
   'glycolysis,pdh' = "thistle3",
   'fao' = "lightcoral",
-  'etc' = "mistyrose",
+  'etc' = "darkgreen",
   'chylomicron_clearance' = "pink", 
   'uncoupling_proteins' = "darkslategray3",
   'atp_synthesis' = "sienna2",

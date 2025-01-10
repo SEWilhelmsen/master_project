@@ -61,9 +61,6 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector, proces
     stop("Input data must be a matrix.")
   }
   
-  heatmap_matrix_numeric[is.na(heatmap_matrix_numeric)] <- 0
-  heatmap_matrix_numeric[!is.finite(heatmap_matrix_numeric)] <- 0
-  
   if (nrow(heatmap_matrix_numeric) != length(go_association_vector)) {
     stop("Mismatch between number of matrix rows and association vector length.")
   }
