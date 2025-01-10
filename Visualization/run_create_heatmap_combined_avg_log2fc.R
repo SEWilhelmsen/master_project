@@ -11,10 +11,11 @@ source("C:/Users/siljeew/snRNAseq/Visualization/create_heatmap_combined_avg_log2
 ### Set parameters
 #######################################################################
 output_dir_plot <- "C:/Users/siljeew/snRNAseq/Plots"
+output_dir_heatmap <- "C:/Users/siljeew/snRNAseq/Plots/Heatmap"
 
 # Ensure the directory exists
-if (!dir.exists(output_dir_plot)) {
-  dir.create(output_dir_plot, recursive = TRUE)
+if (!dir.exists(output_dir_heatmap)) {
+  dir.create(output_dir_heatmap, recursive = TRUE)
 }
 
 #Load data
@@ -105,5 +106,6 @@ print(head(go_association_vector))
 ### Create and save heatmap
 #######################################################################
 heatmap_plot <- create_heatmap(heatmap_matrix_numeric, go_association_vector, process_colors)
+any(is.na(heatmap_matrix_numeric))
 
-save_heatmap_complex(heatmap_plot, output_dir_plot, go_processes_of_interest_for_heatmap)
+save_heatmap_complex(heatmap_plot, output_dir_heatmap, go_processes_of_interest_for_heatmap)

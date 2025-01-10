@@ -136,10 +136,10 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector, proces
 
 
 # Function to save a heatmap using ComplexHeatmap and ensure filename reflects processes
-save_heatmap_complex <- function(heatmap, output_dir_plot, processes, file_extension = "png") {
+save_heatmap_complex <- function(heatmap, output_dir_heatmap, processes, file_extension = "png") {
   # Construct file name
   combined_name <- paste(processes, collapse = "_")
-  file_path <- file.path(output_dir_plot, paste(combined_name, "_heatmap.", file_extension, sep = ""))
+  file_path <- file.path(output_dir_heatmap, paste("heatmap_", combined_name, ".", file_extension, sep = ""))
   
   # Print file path to verify it is being created correctly
   print(paste("Saving file to:", file_path))
