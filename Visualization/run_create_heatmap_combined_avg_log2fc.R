@@ -22,7 +22,8 @@ mouse_vcm_all_genes_avg_log2fc <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_v
 head(mouse_vcm_all_genes_avg_log2fc)
 
 # Define go processes of interest
-go_processes_of_interest_for_heatmap <- c('glycolysis', 'tca')
+go_processes_of_interest_for_heatmap <- c('glycolysis', 'pdh')
+
 
 # Retrieve genes of interest
 genes_of_interest_for_heatmap_vector <- get_genes_of_interest(go_processes_of_interest_for_heatmap, define_go_process, get_genes_for_go_process)
@@ -59,8 +60,17 @@ go_association_vector <- sapply(rownames(heatmap_matrix_numeric), function(gene)
   }
 }, USE.NAMES = FALSE)
 
+# Define color mapping for processes
+process_colors <- c(
+  'glycolysis' = "lightgrey",
+  'tca' = "wheat", 
+  "glycolysis,tca" = "wheat4", 
+  'pdh' = "slategray2",
+  'glycolysis,pdh' = "thistle3"
+)
+
 # Define a sorting order
-sorting_order <- factor(go_association_vector, levels = c("glycolysis", "glycolysis,tca", "tca"))
+sorting_order <- factor(go_association_vector, levels = c("glycolysis", "glycolysis,pdh", "pdh"))
 
 # Order the matrix based on the sorting vector
 ordered_indices <- order(sorting_order)
@@ -75,7 +85,6 @@ print(head(go_association_vector))
 
 ### Create and save heatmap
 #######################################################################
-heatmap_plot <- create_heatmap(heatmap_matrix_numeric, go_association_vector)
+heatmap_plot <- create_heatmap(heatmap_matrix_numeric, go_association_vector, process_colors)
 
-ggsave(file.path(output_dir_plot, paste(go_processes_of_interest_for_heatmap, "_heatmap.png", sep = "")), plot = combined_plot, width = 10, height = 7)
-
+save_heatmap_complex(heatmap_plot, output_dir_plot, go_processes_of_interest_for_heatmap)
