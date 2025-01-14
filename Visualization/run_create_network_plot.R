@@ -23,7 +23,6 @@ specific_process_names <- c("glycolysis", "pdh", "etc", "fao", "tca", "ketone_ca
 
 file_path <- "C:/Users/siljeew/snRNAseq/tmp/mouse_6h_vcm.Rds"
 
-#
 threshold <- 0.7
 
 
@@ -47,12 +46,8 @@ adjacency_matrix <- create_adjacency_matrix(correlation_matrix, genes, threshold
 ################################################################################
 # Retrieve GO terms for genes in your network
 gene_symbols <- rownames(subset_expression_matrix)  # Use rownames of filtered expression data
-gene_go_pairs <- get_go_terms_for_genes(gene_symbols)  # Now you have gene_go_pairs initialized
-
-# Proceed with network construction
+gene_go_pairs <- get_go_terms_for_genes(gene_symbols) 
 process_nodes <- names(define_go_process)
-
-# Now this will work, because gene_go_pairs exists
 gene_process_edges <- data.frame(from = gene_go_pairs$GOALL, to = gene_go_pairs$SYMBOL)
 
 
@@ -62,7 +57,7 @@ gene_process_edges <- data.frame(from = gene_go_pairs$GOALL, to = gene_go_pairs$
 process_nodes <- names(define_go_process)
 gene_process_edges <- data.frame(from = gene_go_pairs$GOALL, to = gene_go_pairs$SYMBOL)
 
-# Update edge types; hypothetical representation
+# Update edge types
 node_labels <- setNames(c(process_nodes), define_go_process)
 
 # Confirm all required vertices are in your edge frame
@@ -77,17 +72,13 @@ print(missing_vertices)  # This should show any vertices missing
 vertices_corrected <- unique(c(process_nodes, genes, missing_vertices))
 
 
-# Assuming 'gene_process_edges' is your data frame
-unique_processes <- unique(gene_process_edges$from)  # Get unique process GOs
-number_of_unique_processes <- length(unique_processes)  # Count the number of unique processes
-
-# Print the result
+# Inspect number of unique processes
+unique_processes <- unique(gene_process_edges$from) 
+number_of_unique_processes <- length(unique_processes)  
 cat("Number of unique processes:", number_of_unique_processes, "\n")
 
 # Extract the corresponding GO IDs for these processes
 included_go_process_ids <- unlist(define_go_process[specific_process_names])
-
-# Print the selected GO IDs
 print(included_go_process_ids)
 
 # Filter the gene_process_edges data frame
@@ -109,8 +100,7 @@ print(head(filtered_gene_process_edges))
 graph <- graph_from_data_frame(filtered_gene_process_edges, directed = FALSE, 
                                vertices = unique(c(filtered_gene_process_edges$from, filtered_gene_process_edges$to)))
 
-# Now, remove the directed edge styling like arrows
-#E(graph)$arrow.size <- NULL  # Remove arrow styling
+# Set layout of edges/lines
 E(graph)$color <- "grey"
 E(graph)$arrow.size <- 0.5
 
@@ -131,7 +121,7 @@ V(graph)$type <- ifelse(V(graph)$name %in% filtered_gene_process_edges$to, "gene
 
 # Style vertices: Set gene nodes to be transparent and size zero
 V(graph)$color <- ifelse(V(graph)$type == "process", "bisque1", "white")  
-V(graph)$size <- ifelse(V(graph)$type == "process", 10, 5)
+V(graph)$size <- ifelse(V(graph)$type == "process", 10, 7) 
 
 # Adjust label size for better visibility if needed
 V(graph)$label.cex <- ifelse(V(graph)$type == "process", 0.8, 0.7)
