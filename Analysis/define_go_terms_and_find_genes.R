@@ -1,6 +1,4 @@
 ### Define gene ontology terms and find related genes 
-## Output: list of gene symbols in uppercase (normalized_go_genes) and
-## a unique vector of all gene symbols involved in gene ontology processes (all_go_genes)
 # Silje Wilhelmsen
 
 # Load libraries
