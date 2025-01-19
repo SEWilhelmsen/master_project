@@ -66,7 +66,7 @@ vertices_needed <- unique(c(process_nodes, genes))
 
 # Identify any missing vertex labels
 missing_vertices <- setdiff(all_vertices, vertices_needed)
-print(missing_vertices)  # This should show any vertices missing
+print(missing_vertices)  # Show any vertices missing
 
 # Verify process nodes and genes consistency
 vertices_corrected <- unique(c(process_nodes, genes, missing_vertices))
