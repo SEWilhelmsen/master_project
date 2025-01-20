@@ -24,6 +24,7 @@ if (!dir.exists(output_dir_network)) {
 
 # GO process for filtering genes in dataset
 go_processes_of_interest <- c('glycolysis')
+
 # GO processes to include as nodes in the plot
 specific_process_names <- c("glycolysis", "pdh", "etc", "fao", "tca", "ketone_catabolism", "protein_transmembrane_transport", "chylomicron_clearance", "atp_synthesis", "uncoupling_proteins", "ketone_metabolic_process")
 
@@ -35,8 +36,8 @@ specific_process_names <- c("glycolysis", "pdh", "etc", "fao", "tca", "ketone_ca
 mouse_vcm_all_genes_avg_log2fc <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_all_genes_avg_log2fc.rds")
 
 # Check the column names and change to shorter and more readable names
-colnames(mouse_vcm_all_genes_avg_log2fc) <- c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks")
-# View(mouse_vcm_all_genes_avg_log2fc) 
+colnames(mouse_vcm_all_genes_avg_log2fc) <- c("6 _Hours", "12_Hours", "1_Day", "3_Days", "1_Week", "3_Weeks")
+View(mouse_vcm_all_genes_avg_log2fc) 
 
 # Subset for time point 
 time_point_of_interest <- "6 Hours"
@@ -67,13 +68,10 @@ filtered_rows <- rownames(expression_data_filtered) %in% genes_of_interest_unlis
 # Keep a data frame with only common rows from filtered_rows
 expression_data_filtered <- expression_data_filtered[filtered_rows, , drop = FALSE]
 View(expression_data_filtered)
-nrow(expression_data_filtered) # 51 rows left
-# Verify the structure of the filtered data
-print(str(expression_data_filtered))  # Check structure: data.frame
+nrow(expression_data_filtered)
+print(str(expression_data_filtered))
 # Should have a data frame with one time point and no NA-values
 
-# Contains 51 genes, which is the correct number. Somehow genes are included again, somewhere in the next processes. 
-# How to keep only the 51 genes in the plot? 
 
 
 # Prepare association data frame
@@ -175,7 +173,6 @@ nrow(filtered_gene_process_edges)  # Confirm the number of edges after filtering
 
 # Create and save plot
 ############################################################################
-
 # Create graph using the node data
 graph <- graph_from_data_frame(filtered_gene_process_edges, directed = FALSE, vertices = vertices)
 
@@ -231,13 +228,11 @@ create_network <- function(expression_data_filtered, graph) {
       fold_change_value <- expression_data_filtered[name, , drop = TRUE]
       if (!is.na(fold_change_value) && fold_change_value > 0) {
         return("rosybrown1")
-      } else if (!is.na(fold_change_value)) {
-        return("lightblue1")
       } else {
-        return("grey")  
+        return("lightblue1")
       }
     } else {
-      return("grey")  
+      return("grey")
     }
   })
   
@@ -248,7 +243,7 @@ create_network <- function(expression_data_filtered, graph) {
   # Create advanced network plot using ggraph
   network_plot <- ggraph(graph, layout = 'fr') +
     geom_edge_link(aes(edge_alpha = 0.5), color = "grey", show.legend = FALSE) +
-    geom_node_label(aes(label = label, fill = I(color)), fontface = "plain", color = "black", size = 5, label.size = 0) +
+    geom_node_label(aes(label = label, fill = I(color)), fontface = "plain", color = "black", size = 4, label.size = 0, repel = TRUE) +
     scale_fill_identity() +
     theme_void() +
     labs(title = "Gene-Process Network of Differentially Expressed Genes")
@@ -260,3 +255,15 @@ create_network <- function(expression_data_filtered, graph) {
 # Create plot with coloring based on expression data in the advanced layout
 networkplot <- create_network(expression_data_filtered, graph)
 print(networkplot)
+
+# Save plot 
+file_name <- paste0(time_point_of_interest, "_network.png")
+file_path <- file.path(output_dir_network, file_name)
+
+# Save the plot to a file
+png(file_path, width = 1000, height = 1000)
+print(networkplot)
+dev.off()
+
+# Confirm the file path if needed
+print(paste("Plot saved at:", file_path))
