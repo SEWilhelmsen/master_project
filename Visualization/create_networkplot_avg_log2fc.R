@@ -128,15 +128,10 @@ View(vertices)
 print(nrow(vertices))
 print(head(vertices))
 
-# vertices contains 51 genes and 6 GO:IDs, which is the correct number. Somehow genes are included again, somewhere in the next processes. 
-# How to keep only the 51 genes in the plot? 
 
-# Create and save plot
+
+# Create nodes of genes and processes
 ############################################################################
-
-
-
-############ Something is worng under here ############################
 # Define your GO IDs and retrieve their names from GO.db
 go_ids <- unlist(define_go_process)
 go_terms <- AnnotationDbi::select(GO.db,
@@ -159,12 +154,6 @@ unique_filtered_processes <- unique(filtered_gene_process_edges$from)
 number_of_filtered_processes <- length(unique_filtered_processes)
 cat("Number of unique filtered processes:", number_of_filtered_processes, "\n") # Prints 6
 print(head(filtered_gene_process_edges))
-
-#Error in graph_from_data_frame(filtered_gene_process_edges, directed = FALSE,  : 
-# Some vertex names in edge list are not listed in vertex data frame
-
-# Is it possible to exclude rows that does not have the gene name corresponding to one in vertices? 
-
 View(filtered_gene_process_edges)
 
 # Assume 'vertices' contains the names of all valid nodes, including genes and GO terms
@@ -178,19 +167,16 @@ filtered_gene_process_edges <- filtered_gene_process_edges[
 
 View(filtered_gene_process_edges)
 
-# # Optional: Also ensure 'from' column values are valid to avoid any inconsistencies with processes
-# filtered_gene_process_edges <- filtered_gene_process_edges[
-#   filtered_gene_process_edges$from %in% valid_gene_vertices, 
-# ]
-
 # Verify the updated edges
 print(head(filtered_gene_process_edges))
 nrow(filtered_gene_process_edges)  # Confirm the number of edges after filtering
 
 
-########################################################################
 
-# # Continue with graph creation using the filtered edges and verified vertices
+# Create and save plot
+############################################################################
+
+# Create graph using the node data
 graph <- graph_from_data_frame(filtered_gene_process_edges, directed = FALSE, vertices = vertices)
 
 
@@ -221,7 +207,6 @@ V(graph)$size <- ifelse(V(graph)$type == "process", 8, 5)
 layout <- layout_with_fr(graph)
 
 
-
 # Plot (basic igraph plot)
 plot(graph, 
      layout = layout, 
@@ -245,9 +230,9 @@ create_network <- function(expression_data_filtered, graph) {
     if (name %in% rownames(expression_data_filtered)) {
       fold_change_value <- expression_data_filtered[name, , drop = TRUE]
       if (!is.na(fold_change_value) && fold_change_value > 0) {
-        return("red")
+        return("rosybrown1")
       } else if (!is.na(fold_change_value)) {
-        return("blue")
+        return("lightblue1")
       } else {
         return("grey")  # Default or non-matching cases
       }
@@ -263,8 +248,9 @@ create_network <- function(expression_data_filtered, graph) {
   # Create advanced network plot using ggraph
   network_plot <- ggraph(graph, layout = 'fr') +
     geom_edge_link(aes(edge_alpha = 0.5), color = "grey", show.legend = FALSE) +
-    geom_node_point(aes(color = I(color)), size = 7) +
-    geom_node_text(aes(label = label), repel = TRUE, size = 4) +
+    geom_node_point(aes(color = I(color)), size = 10) +
+    geom_node_text(aes(label = label), size = 5, show.legend = FALSE, repel = FALSE) +
+    geom_node_label(aes(label = label, fill = I(color)), fontface = "plain", color = "black", size = 5, show.legend = FALSE, label.size = 0) +
     scale_color_identity() +
     theme_void() +
     labs(title = "Gene-Process Network of Differentially Expressed Genes")
