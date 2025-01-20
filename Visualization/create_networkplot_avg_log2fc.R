@@ -234,10 +234,10 @@ create_network <- function(expression_data_filtered, graph) {
       } else if (!is.na(fold_change_value)) {
         return("lightblue1")
       } else {
-        return("grey")  # Default or non-matching cases
+        return("grey")  
       }
     } else {
-      return("grey")  # Ensure non-process nodes default appropriately
+      return("grey")  
     }
   })
   
@@ -248,10 +248,8 @@ create_network <- function(expression_data_filtered, graph) {
   # Create advanced network plot using ggraph
   network_plot <- ggraph(graph, layout = 'fr') +
     geom_edge_link(aes(edge_alpha = 0.5), color = "grey", show.legend = FALSE) +
-    geom_node_point(aes(color = I(color)), size = 10) +
-    geom_node_text(aes(label = label), size = 5, show.legend = FALSE, repel = FALSE) +
-    geom_node_label(aes(label = label, fill = I(color)), fontface = "plain", color = "black", size = 5, show.legend = FALSE, label.size = 0) +
-    scale_color_identity() +
+    geom_node_label(aes(label = label, fill = I(color)), fontface = "plain", color = "black", size = 5, label.size = 0) +
+    scale_fill_identity() +
     theme_void() +
     labs(title = "Gene-Process Network of Differentially Expressed Genes")
   
