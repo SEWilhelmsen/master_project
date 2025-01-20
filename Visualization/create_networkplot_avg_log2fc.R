@@ -90,7 +90,7 @@ get_go_terms_for_genes <- function(genes) {
 # Retrieve GO terms for genes of interest
 gene_go_pairs <- get_go_terms_for_genes(genes)
 
-nrow(gene_go_pairs) # Number of rows: 
+nrow(gene_go_pairs) # Number of rows: 40798
 
 # Create edges with genes to GO terms
 edges <- data.frame(from = gene_go_pairs$SYMBOL, to = gene_go_pairs$GOALL)
@@ -106,15 +106,37 @@ print(nrow(filtered_edges)) # Prints 155
 # Get all unique vertices needed for this subset (genes plus chosen processes)
 filtered_vertex_names <- unique(c(filtered_edges$from, filtered_edges$to))
 vertices <- data.frame(name = filtered_vertex_names)
-View(filtered_vertex_names)
-View(vertices) # Has only gene names, no row names and no column names
-head(vertices)
-head(filtered_vertex_names)
 
+View(filtered_vertex_names)
+View(vertices)
+head(vertices)
+
+# Make sure only the 51 genes from expression_data_filtered are present in vertices
+genes_with_expression <- rownames(expression_data_filtered)
+genes_in_vertices <- vertices$name[!(grepl("^GO:", vertices$name))]
+go_terms_in_vertices <- vertices$name[grepl("^GO:", vertices$name)]
+
+# Filter vertices to only include the 51 genes and those GO terms
+filtered_vertex_names <- unique(c(genes_with_expression, go_terms_in_vertices))
+
+# Create the filtered vertices data frame
+vertices <- data.frame(name = filtered_vertex_names)
+View(vertices)
+
+
+# Check the result to verify it has the expected structure
+print(nrow(vertices))
+print(head(vertices))
+
+# vertices contains 51 genes and 6 GO:IDs, which is the correct number. Somehow genes are included again, somewhere in the next processes. 
+# How to keep only the 51 genes in the plot? 
 
 # Create and save plot
 ############################################################################
 
+
+
+############ Something is worng under here ############################
 # Define your GO IDs and retrieve their names from GO.db
 go_ids <- unlist(define_go_process)
 go_terms <- AnnotationDbi::select(GO.db,
@@ -137,11 +159,39 @@ unique_filtered_processes <- unique(filtered_gene_process_edges$from)
 number_of_filtered_processes <- length(unique_filtered_processes)
 cat("Number of unique filtered processes:", number_of_filtered_processes, "\n") # Prints 6
 print(head(filtered_gene_process_edges))
-# 
+
+#Error in graph_from_data_frame(filtered_gene_process_edges, directed = FALSE,  : 
+# Some vertex names in edge list are not listed in vertex data frame
+
+# Is it possible to exclude rows that does not have the gene name corresponding to one in vertices? 
+
+View(filtered_gene_process_edges)
+
+# Assume 'vertices' contains the names of all valid nodes, including genes and GO terms
+# We extract the 'name' column from 'vertices', which contains all valid vertex names
+valid_gene_vertices <- vertices$name
+
+# Filter 'filtered_gene_process_edges' to keep only those rows with 'to' values in 'valid_gene_vertices'
+filtered_gene_process_edges <- filtered_gene_process_edges[
+  filtered_gene_process_edges$to %in% valid_gene_vertices, 
+]
+
+View(filtered_gene_process_edges)
+
+# # Optional: Also ensure 'from' column values are valid to avoid any inconsistencies with processes
+# filtered_gene_process_edges <- filtered_gene_process_edges[
+#   filtered_gene_process_edges$from %in% valid_gene_vertices, 
+# ]
+
+# Verify the updated edges
+print(head(filtered_gene_process_edges))
+nrow(filtered_gene_process_edges)  # Confirm the number of edges after filtering
+
+
+########################################################################
+
 # # Continue with graph creation using the filtered edges and verified vertices
-# vertices_final <- data.frame(name = vertices_corrected)
 graph <- graph_from_data_frame(filtered_gene_process_edges, directed = FALSE, vertices = vertices)
-# View(vertices_final) # Has 4444 rows
 
 
 # Identify type: process or gene
