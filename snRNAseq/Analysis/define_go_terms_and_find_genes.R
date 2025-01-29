@@ -27,6 +27,8 @@ define_go_process <- list(
   regulation_of_ketone_metabolic_process = "GO:0010565",
   ketone_catabolism = "GO:0046952",
   cardiac_muscle_contraction = "GO:0060048",
+  negative_regulation_of_cardiac_muscle_contraction = "GO:0055118",
+  positive_regulation_of_cardiac_muscle_contraction = "GO:0060452",
   calcium_signaling_pathway = "GO:0019722"
 )
 

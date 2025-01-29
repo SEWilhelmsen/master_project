@@ -1,7 +1,7 @@
 Presentasjoner
 snRNAseq/Analysis/Uferdig
 snRNAseq/Analysis/Script_for_Silje.R
-snRNAseq/Analysis/InstallPackages
+snRNAseq/Analysis/InstallPackages.R
 snRNAseq/Analysis/.Rhistory
 snRNAseq/Data
 snRNAseq/Plots
@@ -17,13 +17,14 @@ snRNAseq/InstallPackages.R
 snRNAseq/notes.txt
 snRNAseq/theme_minimal.pdf
 snATACseq/Analysis/install_packages_atac.R
-snATACseq/Analysis/test.R
+snATACseq/Analysis/test2.R
 snATACseq/Analysis/preprocessing_from_yt.R
 snATACseq/Analysis/.Rhistory
 snATACseq/Data
 snATACseq/Plots
 snATACseq/tmp
 snATACseq/Visualization/.Rhistory
+snATACseq/add_atac_layer_to_seurat_object.R
 snATACseq/fra_Ioanni.R
 snATACseq/test.R
 .Rhistory

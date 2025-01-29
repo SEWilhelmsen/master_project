@@ -14,13 +14,13 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/find_specific_genes.R"
 source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
 
 # For positive control
-source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_heart_failure_process.R")
+#source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_heart_failure_process.R")
 
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'cardiac_muscle_contraction'
-output_dir_plot <- "C:/Users/siljeew/snRNAseq/Plots"
+go_process_of_interest <- 'positive_regulation_of_cardiac_muscle_contraction'
+output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots"
 
 # Ensure output plot directory exists
 if (!dir.exists(output_dir_plot)) {
@@ -58,9 +58,6 @@ print(paste("Genes of interest for process", go_process_of_interest, "are:", pas
 #########################################################################
 # Process and combine data from all Seurat objects
 combined_data_long <- do.call(rbind, lapply(file_paths, process_seurat_object, genes_of_interest = genes_of_interest))
-
-# Optionally save the combined data for future use or debugging
-#saveRDS(combined_data_long, file = rds_file_path)
 
 
 

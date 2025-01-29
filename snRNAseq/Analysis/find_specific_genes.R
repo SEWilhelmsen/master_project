@@ -38,6 +38,9 @@ gene_list <- list(
   regulation_of_ketone_metabolic_process = toupper(c("AVP", "SLC45A3", "PLIN5")),
   hydroxybutyrate_dehydrogenase_activity = toupper(c("BDH1", "BDH2")),
   ketone_catabolism = toupper(c("ACAT1", "OXCT1", "OXCT2", "OXCT2A", "OXCT2B")),
+  cardiac_muscle_contraction = toupper(c("ATP2A2", "TNNI3","ATP1A1", "ATP1A2", "ATP1B1", "ATP2A1")),
+  negative_regulation_of_cardiac_muscle_contraction = toupper(c("ADCY10", "BIN1", "PDE5A", "SRI", "ZC3H12A", "PIK3CG","MIR3")),
+  positive_regulation_of_cardiac_muscle_contraction = toupper(c("ADRA1A", "HSP90AA1", "KCNQ1", "NPPA", "RGS2")),
   stress_markers = toupper(c("NPPA", "NPPB", "MYH7"))
 )
 

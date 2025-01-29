@@ -8,7 +8,7 @@ library(dplyr)
 library(readr)
 
 # Define gene ontology process
-go_id_uof_process <- list(
+go_id_process <- list(
   cardiac_muscle_contraction = "GO:0060048",
   calcium_signaling_pathway = "GO:0019722",
   cardiac_muscle_tissue_growth = "GO:0055017"
