@@ -1,4 +1,4 @@
-# Boxplot of heart weight
+# Boxplot of a variable
 # Input: table (excel?) of animal data
 # Output: histograms of all samples, by condition and time_point
 # Silje Wilhelmsen
@@ -42,7 +42,7 @@ create_boxplot <- function(processed_data_highlighted, condition, variable_of_in
 
 boxplot <- create_boxplot(processed_data_highlighted, "condition", variable_of_interest)
 
-# ORiginal - does this have centred points? 
+# Original - does this have centred points? 
 
 create_boxplot <- function(processed_data_highlighted, condition, variable_of_interest) {
   

@@ -25,7 +25,9 @@ define_go_process <- list(
   ketone_metabolic_process = "GO:0042180",
   hydroxybutyrate_dehydrogenase_activity = "GO:0003858",
   regulation_of_ketone_metabolic_process = "GO:0010565",
-  ketone_catabolism = "GO:0046952"
+  ketone_catabolism = "GO:0046952",
+  cardiac_muscle_contraction = "GO:0060048",
+  calcium_signaling_pathway = "GO:0019722"
 )
 
 # Function to retrieve genes for a GO term

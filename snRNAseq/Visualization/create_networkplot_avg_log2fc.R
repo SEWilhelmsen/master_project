@@ -217,6 +217,7 @@ plot(graph,
      edge.width = 0.7)
 
 
+# How to insert color parameters to explain red and blue coloring? 
 
 # Enhanced Plot with ggraph
 create_network <- function(expression_data_filtered, graph) {

@@ -7,14 +7,14 @@
 ###############################################################################
 
 # Source necessary files
-source("C:/Users/siljeew/snRNAseq/Analysis/extract_and_clean_data_from_animal_overview.R")
-source("C:/Users/siljeew/snRNAseq/Visualization/create_boxplot_variable.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/extract_and_clean_data_from_animal_overview.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_boxplot_variable.R")
 
 # Load libraries
 load_libraries()
 
 # File path to the Excel file
-file_path <- "C:/Users/siljeew/snRNAseq/Animal_overview_TP.xlsx"
+file_path <- "C:/Users/siljeew/Master_project/snRNAseq/Animal_overview_TP.xlsx"
 
 # Prepare data from original excel file
 processed_data <- process_excel_data(file_path, output_view = TRUE) # run the function in the source

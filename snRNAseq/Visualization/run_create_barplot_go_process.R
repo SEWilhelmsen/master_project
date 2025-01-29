@@ -5,18 +5,21 @@
 
 # Source necessary scripts
 #########################################################################
-source("C:/Users/siljeew/snRNAseq/Visualization/load_libraries_run_create_barplot_go_process.R")
-source("C:/Users/siljeew/snRNAseq/Visualization/create_barplot_go_process.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/process_seurat_data.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/t_test_go_process.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/find_specific_genes.R")
-source("C:/Users/siljeew/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/load_libraries_run_create_barplot_go_process.R")
+source("C:/Users/siljeew/MAster_project/snRNAseq/Visualization/create_barplot_go_process.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/process_seurat_data.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/perform_t_test_for_go_process.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/find_specific_genes.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
+
+# For positive control
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_heart_failure_process.R")
 
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'hydroxybutyrate_dehydrogenase_activity'
+go_process_of_interest <- 'cardiac_muscle_contraction'
 output_dir_plot <- "C:/Users/siljeew/snRNAseq/Plots"
 
 # Ensure output plot directory exists
@@ -26,12 +29,12 @@ if (!dir.exists(output_dir_plot)) {
 
 # Define file paths for Seurat objects
 file_paths <- list(
-  "C:/Users/siljeew/snRNAseq/tmp/mouse_6h_vcm.Rds",
-  "C:/Users/siljeew/snRNAseq/tmp/mouse_12h_vcm.Rds",
-  "C:/Users/siljeew/snRNAseq/tmp/mouse_1d_vcm.Rds",
-  "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3d.Rds",
-  "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1w.Rds",
-  "C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3w.Rds"
+  "C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_6h_vcm.Rds",
+  "C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_12h_vcm.Rds",
+  "C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_1d_vcm.Rds",
+  "C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_vcm_3d.Rds",
+  "C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_vcm_1w.Rds",
+  "C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_vcm_3w.Rds"
 )
 
 
@@ -64,7 +67,7 @@ combined_data_long <- do.call(rbind, lapply(file_paths, process_seurat_object, g
 ### Perform t-test
 ########################################################################
 # Ensure the output directory exists for the data 
-output_dir_data <- "C:/Users/siljeew/snRNAseq/Data"
+output_dir_data <- "C:/Users/siljeew/Master_project/snRNAseq/Data"
 if (!dir.exists(output_dir_data)) {
   dir.create(output_dir_data, recursive = TRUE)
 }
@@ -119,7 +122,7 @@ ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_levels_over_ti
 ### Create genes plot
 #########################################################################
 # Set parameters 
-file_path_to_data_avg_log2fc <- "C:/Users/siljeew/snRNAseq/Data/mouse_vcm_all_genes_avg_log2fc.csv"
+file_path_to_data_avg_log2fc <- "C:/Users/siljeew/Master_project/snRNAseq/Data/mouse_vcm_all_genes_avg_log2fc.csv"
 
 data_avg_log2fc <- read_csv2(file_path_to_data_avg_log2fc)
 
