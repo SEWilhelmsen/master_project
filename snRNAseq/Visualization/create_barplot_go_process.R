@@ -89,7 +89,7 @@ generate_plot <- function(summary_data, significance_data, go_process_of_interes
   go_plot <- ggplot(summary_data, aes(x = time_point, y = mean_expression, fill = condition)) +
     geom_bar(stat = "identity", width = 0.5, position = position_dodge()) +
     #labs(title = paste(go_process_of_interest, "levels over time"), x = "Time Points", y = paste(go_process_of_interest, "Level")) +
-    labs(x = "Time Points", y = paste(go_process_of_interest, "Level")) +
+    labs(x = NULL, y = paste(go_process_of_interest, "Level")) +
     theme_minimal() +
     scale_fill_manual(values = c("SHAM" = "grey", "AB" = "coral")) +
     scale_y_continuous(limits = c(0, max_y_position * 1.1)) +  # Add extra space above the bars
@@ -98,8 +98,7 @@ generate_plot <- function(summary_data, significance_data, go_process_of_interes
       aes(x = time_point, y = y.position, label = significance, fill = NULL),  # Remove fill from text layer
       vjust = -0.5,
       position = position_dodge(width = 0.75)
-    ) +
-    labs(x = "Time Points", y = paste(go_process_of_interest, "level"))
+    ) 
   
   return(go_plot)
 }
