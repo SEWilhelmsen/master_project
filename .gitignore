@@ -16,10 +16,14 @@ snRNAseq/common_genes_with_avg_log2FC_with_description.xlsx
 snRNAseq/InstallPackages.R
 snRNAseq/notes.txt
 snRNAseq/theme_minimal.pdf
-snATACseq/Analysis/InstallPackages
+snATACseq/Analysis/install_packages_atac.R
+snATACseq/Analysis/test.R
+snATACseq/Analysis/preprocessing_from_yt.R
 snATACseq/Analysis/.Rhistory
 snATACseq/Data
 snATACseq/Plots
 snATACseq/tmp
+snATACseq/fra_ioanni.R
+snATACseq/test.R
 snATACseq/Visualization/.Rhistory
 .Rhistory
