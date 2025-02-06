@@ -128,7 +128,7 @@ mouse_1w <- IntegrateLayers(object = mouse_1w,
                                       orig.reduction = "pca", 
                                       new.reduction = "integrated.rpca",
                             verbose = FALSE)
-mouse_1w <- JoinLayers(mouse_1w_integrate)
+mouse_1w <- JoinLayers(mouse_1w)
 
 
 # Save Seurat object
