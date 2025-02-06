@@ -11,12 +11,6 @@ library(readr)
 
 create_go_genes_plot <- function(data_avg_log2fc, go_process_of_interest_genes) {  
   
-  # # Import data 
-  # data_avg_log2fc <- read_csv2(file_path_to_data_avg_log2fc)
-  #   
-  # # Ensure gene names are uppercase
-  # data_avg_log2fc$gene <- toupper(data_avg_log2fc$gene)
-  
   # Subset the data to include only genes in go_process_of_interest_genes
   data_avg_log2fc_genes_of_interest <- data_avg_log2fc %>%
     filter(gene %in% go_process_of_interest_genes)
@@ -40,7 +34,7 @@ create_go_genes_plot <- function(data_avg_log2fc, go_process_of_interest_genes) 
     geom_line(size = 1) +
     geom_point(size = 2) +
     scale_color_brewer(palette = "Set1") +
-    xlab("Time Point") +
+    xlab(NULL) +
     ylab("Average log 2 fold change expression") +
     #ggtitle("Average log 2 fold change expression of specific genes") +
     geom_hline(yintercept = 0, linetype = "dashed", color = "black") +

@@ -72,12 +72,12 @@ perform_kruskal_wallis_test(processed_data, variable_of_interest, output_csv_pat
 # output_csv_path <- file.path(output_dir, "mann_whitney_results.csv")
 # perform_mann_whitney_test(processed_data, variable_of_interest, output_csv_path)
 
-# t-test
+# t-test for parametric samples
 output_csv_path <- file.path(output_dir, "t_test_results.csv")
 output_xlsx_path <- file.path(output_dir, "t_test_results.xlsx")
 perform_t_test(processed_data, variable_of_interest, output_csv_path, output_xlsx_path)
 
-# Perform Welch test (samme som over)
+# Perform Welch test between two groups with unequal variance
 output_csv_path <- file.path(output_dir, "welch_test_results.csv")
 output_xlsx_path <- file.path(output_dir, "welch_test_results.xlsx")
 perform_welch_test(processed_data, variable_of_interest, output_csv_path, output_xlsx_path)
@@ -94,10 +94,6 @@ tukey_csv_path <- file.path(output_dir, "tukey_results.csv")
 tukey_xlsx_path <- file.path(output_dir, "tukey_results.xlsx")
 
 perform_anova_tukey_test(processed_data, variable_of_interest, anova_csv_path, anova_xlsx_path, tukey_csv_path, tukey_xlsx_path)
-
-
-# Levene's
-
 
 
 
