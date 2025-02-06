@@ -20,8 +20,8 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_s
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'ligand_modulated_transcription_factor_activity'
-output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots"
+go_process_of_interest <- 'transmembrane_transporter_activity'
+output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Gene_process"
 
 # Ensure output plot directory exists
 if (!dir.exists(output_dir_plot)) {
