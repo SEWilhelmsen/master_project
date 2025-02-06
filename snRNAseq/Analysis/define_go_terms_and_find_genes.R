@@ -36,7 +36,11 @@ define_go_process <- list(
   dna_binding_transcription_activator_activity = "GO:0001216",
   dna_binding_transcription_factor_activity_rna_polymeraseII_specific = "GO:0000981",
   dna_bindingtranscription_repressor_activity = "GO:0001217",
-  ligand_modulated_transcription_factor_activity = "GO:0098531"
+  ligand_modulated_transcription_factor_activity = "GO:0098531",
+  transporter_activity = "GO:0005215",
+  lipid_transporter_activity = "GO:0005319",
+  protein_transporter_activity = "GO:0140318",
+  transmembrane_transporter_activity = "GO:0022857"
 )
 
 # Function to retrieve genes for a GO term
