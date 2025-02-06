@@ -41,6 +41,10 @@ gene_list <- list(
   cardiac_muscle_contraction = toupper(c("ATP2A2", "TNNI3","ATP1A1", "ATP1A2", "ATP1B1", "ATP2A1")),
   negative_regulation_of_cardiac_muscle_contraction = toupper(c("ADCY10", "BIN1", "PDE5A", "SRI", "ZC3H12A", "PIK3CG","MIR3")),
   positive_regulation_of_cardiac_muscle_contraction = toupper(c("ADRA1A", "HSP90AA1", "KCNQ1", "NPPA", "RGS2")),
+  calcium_signaling_pathway = toupper(c()),
+  cardiac_muscle_tissue_growth = toupper(c()),
+  regulation_of_cardiac_calcium_signaling = toupper(c("ATP1A2", "ATP1B1", "ATP2A2", "CALM1", "CALM2", "CALM3",
+                                                    "PLN", "TNNI3")),
   stress_markers = toupper(c("NPPA", "NPPB", "MYH7"))
 )
 

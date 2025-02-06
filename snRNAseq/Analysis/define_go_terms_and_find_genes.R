@@ -29,7 +29,14 @@ define_go_process <- list(
   cardiac_muscle_contraction = "GO:0060048",
   negative_regulation_of_cardiac_muscle_contraction = "GO:0055118",
   positive_regulation_of_cardiac_muscle_contraction = "GO:0060452",
-  calcium_signaling_pathway = "GO:0019722"
+  calcium_mediated_signaling = "GO:0019722",
+  regulation_of_cardiac_calcium_signaling = "GO:0010882",
+  cardiac_muscle_tissue_growth = "GO:0055017",
+  dna_binding_transcription_factor_activity = "GO:0003700", 
+  dna_binding_transcription_activator_activity = "GO:0001216",
+  dna_binding_transcription_factor_activity_rna_polymeraseII_specific = "GO:0000981",
+  dna_bindingtranscription_repressor_activity = "GO:0001217",
+  ligand_modulated_transcription_factor_activity = "GO:0098531"
 )
 
 # Function to retrieve genes for a GO term

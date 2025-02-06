@@ -6,7 +6,7 @@
 # Source necessary scripts
 #########################################################################
 source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/load_libraries_run_create_barplot_go_process.R")
-source("C:/Users/siljeew/MAster_project/snRNAseq/Visualization/create_barplot_go_process.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_barplot_go_process.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/process_seurat_data.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/perform_t_test_for_go_process.R")
@@ -16,10 +16,11 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_s
 # For positive control
 #source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_heart_failure_process.R")
 
+ 
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'positive_regulation_of_cardiac_muscle_contraction'
+go_process_of_interest <- 'ligand_modulated_transcription_factor_activity'
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots"
 
 # Ensure output plot directory exists
