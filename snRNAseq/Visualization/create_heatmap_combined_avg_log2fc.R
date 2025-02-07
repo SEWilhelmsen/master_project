@@ -71,7 +71,7 @@ create_heatmap <- function(heatmap_matrix_numeric, go_association_vector, proces
     show_column_names = TRUE,
     column_names_rot = 45,
     column_names_centered = TRUE,
-    column_title = "Differential Gene Expression AB vs SHAM",
+    column_title = "Differential Gene Expression ORAB vs SHAM",
     show_column_dend = FALSE,
     width = unit(10, "cm"),
     heatmap_legend_param = list(
