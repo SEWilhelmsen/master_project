@@ -21,3 +21,4 @@ create_gene_process_mapping <- function(genes_of_interest_for_heatmap_vector) {
   
   gene_process_mapping
 }
+
