@@ -3,14 +3,14 @@
 
 # Source functions
 ########################################################################
-source("C:/Users/siljeew/snRNAseq/Visualization/load_libraries_run_create_heatmap_combined_avg_log2fc.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
-source("C:/Users/siljeew/snRNAseq/Visualization/gene_process_mapping.R")
-source("C:/Users/siljeew/snRNAseq/Visualization/create_heatmap_combined_avg_log2fc.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/load_libraries_run_create_heatmap_combined_avg_log2fc.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/gene_process_mapping.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_heatmap_combined_avg_log2fc.R")
 
 ### Set parameters
 #######################################################################
-output_dir_heatmap <- "C:/Users/siljeew/snRNAseq/Plots/Heatmap"
+output_dir_heatmap <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Heatmap"
 
 # Ensure the directory exists
 if (!dir.exists(output_dir_heatmap)) {
@@ -18,7 +18,7 @@ if (!dir.exists(output_dir_heatmap)) {
 }
 
 #Load data
-mouse_vcm_all_genes_avg_log2fc <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_all_genes_avg_log2fc.rds")
+mouse_vcm_all_genes_avg_log2fc <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_vcm_all_genes_avg_log2fc.rds")
 head(mouse_vcm_all_genes_avg_log2fc)
 
 # Define go processes of interest
