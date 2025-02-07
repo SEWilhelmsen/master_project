@@ -45,7 +45,13 @@ gene_list <- list(
   cardiac_muscle_tissue_growth = toupper(c()),
   regulation_of_cardiac_calcium_signaling = toupper(c("ATP1A2", "ATP1B1", "ATP2A2", "CALM1", "CALM2", "CALM3",
                                                     "PLN", "TNNI3")),
-  stress_markers = toupper(c("NPPA", "NPPB", "MYH7"))
+  stress_markers = toupper(c("NPPA", "NPPB", "MYH7")),
+  negative_regulation_of_creb_transcription_factor_activity = toupper(c("DDIT3", "SIK1", "ADGRG3", "EIF2AK4")),
+  positive_regulation_of_creb_transcription_factor_activity = toupper(c("ADCY8", "CD200", "RELN", "LRP8", "RPS6KA5", "CRTC1", "CAMK1D", "CRTC3", "CRTC2")),
+  negative_regulation_of_nf_kappab_transcription_factor_activity = toupper(c("NFKBIA", "NFKBIB", "IRAK1", "IRAK2", "IRAK3")),
+  #positive_regulation_of_nf_kappab_transcription_factor_activity = toupper(c("")),
+  nf_kappab_complex = toupper(c("NFKB1", "REL", "RELA", "RELB")),
+  peroxisome_proliferator_activated_receptor_binding = toupper(c("DUT", "HMGA1", "PRMT2", "MDM2", "NFATC4", "MED1", "TACC1", "NR0B2", "ASXL2", "ASXL3", "ASXL1"))
 )
 
 specific_genes <- unique(unlist(gene_list))

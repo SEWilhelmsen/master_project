@@ -108,6 +108,8 @@ go_process_summary$condition <- factor(go_process_summary$condition, levels = c(
 View(go_process_summary)
 View(p_values_for_plot)
 
+
+
 ### Generate and save process plot
 #########################################################################
 go_plot <- generate_plot(go_process_summary, p_values_for_plot, go_process_of_interest)

@@ -7,7 +7,7 @@ create_gene_process_mapping <- function(genes_of_interest_for_heatmap_vector) {
   
   # Ensure correct indexing on the list
   for (process in names(genes_of_interest_for_heatmap_vector)) {
-    genes <- genes_of_interest_for_heatmap_vector[[process]]  # ensure this accesses correct index
+    genes <- genes_of_interest_for_heatmap_vector[[process]]
     for (gene in genes) {
       # Check symbol normalization for consistency
       gene <- toupper(gene)  # Normalize (if required) to match rownames format

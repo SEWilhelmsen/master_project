@@ -40,7 +40,14 @@ define_go_process <- list(
   transporter_activity = "GO:0005215",
   lipid_transporter_activity = "GO:0005319",
   protein_transporter_activity = "GO:0140318",
-  transmembrane_transporter_activity = "GO:0022857"
+  transmembrane_transporter_activity = "GO:0022857",
+  negative_regulation_of_creb_transcription_factor_activity = "GO:0032792",
+  positive_regulation_of_creb_transcription_factor_activity = "GO:0032793",
+  negative_regulation_of_nf_kappab_transcription_factor_activity = "GO:0032088",
+  positive_regulation_of_nf_kappab_transcription_factor_activity = "GO:0051092",
+  nf_kappab_complex = "GO:0071159",
+  peroxisome_proliferator_activated_receptor_binding = "GO:0042975",
+  transcription_coregulator_activity = "GO:0003712"
 )
 
 # Function to retrieve genes for a GO term
