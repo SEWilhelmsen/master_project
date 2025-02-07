@@ -20,7 +20,7 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_s
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'transmembrane_transporter_activity'
+go_process_of_interest <- 'transcription_coregulator_activity'
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Gene_process"
 
 # Ensure output plot directory exists
