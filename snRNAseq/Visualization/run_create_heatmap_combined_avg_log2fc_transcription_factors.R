@@ -6,7 +6,7 @@
 source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/load_libraries_run_create_heatmap_combined_avg_log2fc.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/gene_process_mapping.R")
-source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_heatmap_combined_avg_log2fc_transcription_factors.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_heatmap_combined_avg_log2fc_no_process_colors.R")
 
 ### Set parameters
 #######################################################################
@@ -107,15 +107,6 @@ print(heatmap_plot)
 # Save heatmap
 save_heatmap_complex(filtered_matrix, heatmap_plot, output_dir_heatmap, go_process_of_interest_for_heatmap, file_extension = "png")
 
+# Save heatmap
+save_heatmap_complex(filtered_matrix, heatmap_plot, output_dir_heatmap, go_process_of_interest_for_heatmap, file_extension = "pdf")
 
-
-# ### Create and save heatmap (not filtered)
-# #######################################################################
-# # Create heatmap
-# heatmap_plot <- create_heatmap(heatmap_matrix_numeric, go_association_vector)
-# print(heatmap_plot)
-# 
-# 
-# # Save heatmap
-# save_heatmap_complex(heatmap_matrix_numeric, heatmap_plot, output_dir_heatmap, go_process_of_interest_for_heatmap, file_extension = "png")
-# 

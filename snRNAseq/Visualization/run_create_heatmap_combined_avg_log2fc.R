@@ -22,7 +22,12 @@ mouse_vcm_all_genes_avg_log2fc <- readRDS("C:/Users/siljeew/Master_project/snRNA
 head(mouse_vcm_all_genes_avg_log2fc)
 
 # Define go processes of interest
-go_processes_of_interest_for_heatmap <- c('glycolysis', 'pdh')
+go_processes_of_interest_for_heatmap <- c('transcription_coactivator_activity',
+                                          'transcription_corepressor_activity',
+                                          'dna_binding_transcription_activator_activity', 
+                                          'dna_binding_transcription_repressor_activity',
+                                          'ligand_modulated_transcription_factor_activity',
+                                          'dna_binding_transcription_factor_activity_rna_polymeraseII_specific')
 
 
 # Retrieve genes of interest
@@ -83,12 +88,24 @@ process_colors <- c(
   'ketone_metabolic_process' = "olivedrab",
   'hydroxybutyrate_dehydrogenase_activity' = "aquamarine4",
   'regulation_of_ketone_metabolic_process' = "orange2",
-  'ketone_catabolism' = "rosybrown"
+  'ketone_catabolism' = "rosybrown",
+  'transcription_coactivator_activity' = "lemonchiffon",
+  'transcription_corepressor_activity' = "whitesmoke",
+  'dna_binding_transcription_activator_activity' = "papayawhip",
+  'dna_binding_transcription_repressor_activity' = "slategray1",
+  'ligand_modulated_transcription_factor_activity' = "aliceblue",
+  'dna_binding_transcription_factor_activity_rna_polymeraseII_specific' = "cornsilk"
 )
 
 
+
 # Define a sorting order
-sorting_order <- factor(go_association_vector, levels = c("glycolysis", "pdh"))
+sorting_order <- factor(go_association_vector, levels = c("transcription_coactivator_activity", 
+                                                          "transcription_corepressor_activity", 
+                                                          "dna_binding_transcription_activator_activity",
+                                                          "dna_binding_transcription_repressor_activity",
+                                                          "ligand_modulated_transcription_factor_activity",
+                                                          "dna_binding_transcription_factor_activity_rna_polymeraseII_specific"))
 
 # Order the matrix based on the sorting vector
 ordered_indices <- order(sorting_order)

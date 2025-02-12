@@ -35,7 +35,7 @@ define_go_process <- list(
   dna_binding_transcription_factor_activity = "GO:0003700", 
   dna_binding_transcription_activator_activity = "GO:0001216",
   dna_binding_transcription_factor_activity_rna_polymeraseII_specific = "GO:0000981",
-  dna_bindingtranscription_repressor_activity = "GO:0001217",
+  dna_binding_transcription_repressor_activity = "GO:0001217",
   ligand_modulated_transcription_factor_activity = "GO:0098531",
   transporter_activity = "GO:0005215",
   lipid_transporter_activity = "GO:0005319",
@@ -47,7 +47,9 @@ define_go_process <- list(
   positive_regulation_of_nf_kappab_transcription_factor_activity = "GO:0051092",
   nf_kappab_complex = "GO:0071159",
   peroxisome_proliferator_activated_receptor_binding = "GO:0042975",
-  transcription_coregulator_activity = "GO:0003712"
+  transcription_coregulator_activity = "GO:0003712",
+  transcription_coactivator_activity = "GO:0003713",
+  transcription_corepressor_activity = "GO:0003714"
 )
 
 # Function to retrieve genes for a GO term

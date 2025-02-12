@@ -20,7 +20,7 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_s
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'transcription_coregulator_activity'
+go_process_of_interest <- 'tca'
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Gene_process"
 
 # Ensure output plot directory exists
@@ -115,6 +115,7 @@ View(p_values_for_plot)
 go_plot <- generate_plot(go_process_summary, p_values_for_plot, go_process_of_interest)
 print(go_plot)
 ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_levels_over_time_by_group.png", sep = "")), plot = go_plot, width = 8, height = 6)
+ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_levels_over_time_by_group.pdf", sep = "")), plot = go_plot, width = 8, height = 6)
 
 
 
@@ -162,3 +163,5 @@ combined_plot <- plot_grid(go_genes_plot, go_plot, align = "v", ncol = 1, rel_he
 combined_plot
 
 ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_and_genes_over_time.png", sep = "")), plot = combined_plot, width = 8, height = 6)
+
+ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_and_genes_over_time.pdf", sep = "")), plot = combined_plot, width = 8, height = 6)
