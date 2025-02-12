@@ -52,4 +52,6 @@ nrow(filter(processed_data_highlighted, is_highlighted == "TRUE"))
 
 # Create and save plot
 boxplot <- create_boxplot(processed_data_highlighted, "condition", variable_of_interest)
-ggsave(file.path(output_dir_plot, paste(variable_of_interest, "_boxplot.png", sep = "")), plot = boxplot, width = 8, height = 6)
+
+#ggsave(file.path(output_dir_plot, paste(variable_of_interest, "_boxplot.png", sep = "")), plot = boxplot, width = 8, height = 6)
+ggsave(file.path(output_dir_plot, paste(variable_of_interest, "_boxplot.pdf", sep = "")), plot = boxplot, width = 8, height = 6)
