@@ -168,11 +168,3 @@ mouse_3d_vcm_markers_significant_genes <- mouse_3d_vcm_markers %>%
   dplyr::filter(p_val_adj < 0.05) %>%
   arrange(desc(abs(avg_log2FC)))
 write.xlsx(mouse_3d_vcm_markers_significant_genes, file = "mouse_3d_vcm_markers_significant_genes.xlsx") # Save data frame as excel
-
-# # Filter for top 200 significant genes
-# mouse_3d_vcm_markers_significant_genes_top_200 <- mouse_3d_vcm_markers %>%
-#   dplyr::filter(p_val_adj < 0.05) %>%
-#   arrange(desc(abs(avg_log2FC))) %>%
-#   head(200)
-# write.xlsx(mouse_3d_vcm_markers_significant_genes_top_200, file = "mouse_3d_vcm_markers_significant_genes_top_200.xlsx") # Save data frame as excel
-# 

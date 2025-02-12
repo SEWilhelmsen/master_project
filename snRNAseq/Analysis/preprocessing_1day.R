@@ -1,4 +1,4 @@
-### RNA sequencing data SHAM vs. AB - Preprocessing
+### RNA sequencing data SHAM vs. ORAB - Preprocessing
 ## Timepoint: 1 Day
 ## Relevant litterature https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.117.030742
 
@@ -56,19 +56,19 @@ TP173 <- CreateSeuratObject(
 counts <- Read10X_h5("D:/MultiomeSeq/TP14-2/outs/filtered_feature_bc_matrix.h5")
 TP142 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "1 Day - AB"
+  assay = "RNA", project = "1 Day - ORAB"
 )
 
 counts <- Read10X_h5("D:/MultiomeSeq/TP14-1/outs/filtered_feature_bc_matrix.h5")
 TP141 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "1 Day - AB"
+  assay = "RNA", project = "1 Day - ORAB"
 )
 
 counts <- Read10X_h5("D:/MultiomeSeq/TP15-3/outs/filtered_feature_bc_matrix.h5")
 TP153 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "1 Day - AB"
+  assay = "RNA", project = "1 Day - ORAB"
 )
 
 
@@ -157,7 +157,7 @@ saveRDS(mouse_1d_vcm, file = "C:/Users/Labuser/snRNAseq/tmp/mouse_1d_vcm.Rds")
 Idents(mouse_1d_vcm) <- mouse_1d_vcm@meta.data$orig.ident
 
 # Find differentially expressed genes
-mouse_1d_vcm_markers <- FindMarkers(mouse_1d_vcm, ident.1 = "1 Day - AB", ident.2 = "1 Day - SHAM")
+mouse_1d_vcm_markers <- FindMarkers(mouse_1d_vcm, ident.1 = "1 Day - ORAB", ident.2 = "1 Day - SHAM")
 
 mouse_1d_vcm_markers_all_genes <- mouse_1d_vcm_markers %>%
   tibble::rownames_to_column(var = "gene") %>%
