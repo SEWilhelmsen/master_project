@@ -19,6 +19,7 @@ define_go_process <- list(
   fatty_acid_transport = "GO:0015908",
   b_oxidation = "GO:0006635",
   monosaccharide_transmembrane_transport = "GO:1905950", 
+  glucose_transmembrane_transport = "GO:1904659",
   protein_transmembrane_transport = "GO:0071806",
   dna_binding_transcription_factor_activity = "GO:0003700",
   translation_regulatory_activity = "GO:0045182",
