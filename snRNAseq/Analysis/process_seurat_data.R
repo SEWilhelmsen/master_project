@@ -14,7 +14,8 @@ library(tibble)
 process_metadata <- function(seurat_object) {
   seurat_object@meta.data <- seurat_object@meta.data %>%
     mutate(time_point = sub(" - .*", "", orig.ident), 
-           condition = sub(".*- ", "", orig.ident))
+           condition = sub(".*- ", "", orig.ident),
+           condition = ifelse(condition == "AB", "ORAB", condition))
   return(seurat_object)
 }
 
@@ -49,4 +50,4 @@ process_seurat_object <- function(file_path, genes_of_interest) {
 }
 
 # Combine data from all Seurat objects
-combined_data_long <- do.call(rbind, lapply(file_paths, process_seurat_object, genes_of_interest = genes_of_interest))
+#combined_data_long <- do.call(rbind, lapply(file_paths, process_seurat_object, genes_of_interest = genes_of_interest))

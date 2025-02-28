@@ -100,7 +100,7 @@ go_process_summary <- go_process_aggregated %>%
 
 # Ensure 'condition' is correctly set as a factor
 go_process_summary$time_point <- factor(go_process_summary$time_point, levels = unique(go_process_summary$time_point))
-go_process_summary$condition <- factor(go_process_summary$condition, levels = c("SHAM", "AB"))
+go_process_summary$condition <- factor(go_process_summary$condition, levels = c("SHAM", "ORAB"))
 
 View(go_process_summary)
 View(p_values_for_plot)
