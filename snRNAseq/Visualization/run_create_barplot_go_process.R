@@ -13,14 +13,12 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/perform_t_test_for_go_
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/find_specific_genes.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
 
-# For positive control
-#source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_heart_failure_process.R")
 
  
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'tca'
+go_process_of_interest <- 'hydroxybutyrate_dehydrogenase_activity'
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Gene_process"
 
 # Ensure output plot directory exists
@@ -39,7 +37,6 @@ file_paths <- list(
 )
 
 
-
 ### Retrieve genes for the gene ontology process
 #########################################################################
 # Retrieve genes for the GO term of interest
@@ -53,7 +50,7 @@ genes_of_interest <- get_genes_for_go_process(go_term)
 print(paste("Genes of interest for process", go_process_of_interest, "are:", paste(genes_of_interest, collapse = ", ")))
 
 
-
+#genes_of_interest <- c("MYH7", "NPPA", "NPPB", "ANKRD1", "HK1", "HK2", "GCK", "PFK1", "PFKM", "PK")
 
 ### Process seurat objects
 #########################################################################
@@ -155,6 +152,7 @@ go_genes_plot <- create_go_genes_plot(data_avg_log2fc, go_process_of_interest_ge
 print(go_genes_plot)
 ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_genes_expression.png", sep = "")), plot = go_genes_plot, width = 8, height = 6)
 
+ggsave(file.path(output_dir_plot, paste(go_process_of_interest, "_genes_expression.pdf", sep = "")), plot = go_genes_plot, width = 8, height = 6)
 
 
 ### Combine the two plots and save
