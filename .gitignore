@@ -1,3 +1,12 @@
+Phenotypic_data/Data
+Phenotypic_data/Plots
+Phenotypic_data/Animal_overview_TP
+Phenotypic_data/.Rhistory
+Phenotypic_data/anova_results.csv
+Phenotypic_data/anova_results.xlsx
+Phenotypic_data/Fibrosis
+Phenotypic_data/tukey_results.csv
+Phenotypic_data/tukey_results.xlsx
 Presentasjoner
 snRNAseq/Analysis/Uferdig
 snRNAseq/Analysis/Script_for_Silje.R
@@ -28,3 +37,4 @@ snATACseq/add_atac_layer_to_seurat_object.R
 snATACseq/fra_Ioanni.R
 snATACseq/test.R
 .Rhistory
+03_Integration_Sample1-4_RNA-ATAC.R
