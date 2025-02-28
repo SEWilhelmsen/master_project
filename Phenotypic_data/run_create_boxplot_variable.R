@@ -24,7 +24,7 @@ processed_data <- process_excel_data(file_path, output_view = TRUE)
 
 
 # Define variables of interest and output directory
-variable_of_interest <- "lvw_bw"  # Change this to the desired variable
+variable_of_interest <- "LVW/TL"  # Change this to the desired variable
 output_dir <- "C:/Users/siljeew/Master_project/Phenotypic_data/Data"
 output_dir_plot <- "C:/Users/siljeew/Master_project/Phenotypic_data/Plots"
 

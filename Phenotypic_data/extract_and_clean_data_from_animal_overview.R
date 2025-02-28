@@ -63,19 +63,18 @@ rename_and_clean_columns <- function(data) {
 
 # Master function to process the excel data
 process_excel_data <- function(file_path, sheet = 1, output_view = FALSE) {
-  # Columns to extract
-  columns_to_extract <- c("#Animal", "Duration", "Op status", "Weight Op (g)", "HW (mg)", "RVW (mg)", "LVW (mg)", "LW (mg)", "TL (mm)", "HW/BW", "RVW/BW", "LVW/BW", "Intention", "Used already for", "LVW/HW")
+  columns_to_extract <- c("#Animal", "Duration", "Op status", "Weight Op (g)", "HW (mg)", "RVW (mg)", "LVW (mg)", "LW (mg)", "TL (mm)", "HW/BW", "RVW/BW", "LVW/BW", "Intention", "Used already for", "LVW/HW", "LVW/TL")
   
-  # Step 1: Read the Excel file
+  # Read the Excel file
   data <- read_excel_file(file_path, sheet)
   
-  # Step 2: Extract relevant columns
+  # Extract relevant columns
   extracted_data <- extract_columns(data, columns_to_extract)
   
-  # Step 3: Filter out rows with NA values in the specific column
+  # Filter out rows with NA values in the specific column
   filtered_data <- filter_data(extracted_data, "LVW (mg)")
   
-  # Step 4: Rename and clean columns
+  # Rename and clean columns
   cleaned_data <- rename_and_clean_columns(filtered_data)
   
   return(cleaned_data)
