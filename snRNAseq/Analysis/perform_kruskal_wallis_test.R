@@ -9,7 +9,7 @@ perform_kruskal_wallis_test <- function(processed_data, variable, output_path) {
   
   # Create a new column 'group' by combining 'condition' and 'time_point'
   processed_data <- processed_data %>%
-    mutate(group = paste(condition, time_point, sep = "_"))
+    mutate(group = paste(Condition, Timepoint, sep = "_"))
   
   result <- kruskal.test(as.formula(paste(variable, "~ group")), data = processed_data)
   
