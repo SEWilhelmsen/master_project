@@ -12,26 +12,26 @@
 perform_t_test <- function(processed_data, variable_of_interest, output_csv_path, output_xlsx_path) {
   
   # Split the data by time_point
-  split_data <- split(processed_data, processed_data$time_point)
+  split_data <- split(processed_data, processed_data$Timepoint)
   
   # Initialize a dataframe to store results
   results_df <- data.frame()
   
   # Loop through each time point and perform the t-test
-  for (time_point in names(split_data)) {
-    data_subset <- split_data[[time_point]]
+  for (Timepoint in names(split_data)) {
+    data_subset <- split_data[[Timepoint]]
     
     variable_of_interest_sham <- data_subset %>%
-      filter(condition == 'sham') %>%
+      filter(Condition == 'SHAM') %>%
       pull(!!sym(variable_of_interest))
     
-    variable_of_interest_ab <- data_subset %>%
-      filter(condition == 'AB') %>%
+    variable_of_interest_orab <- data_subset %>%
+      filter(Condition == 'ORAB') %>%
       pull(!!sym(variable_of_interest))
     
-    if (length(variable_of_interest_sham) > 0 & length(variable_of_interest_ab) > 0) {
+    if (length(variable_of_interest_sham) > 0 & length(variable_of_interest_orab) > 0) {
       # Perform the t-test
-      t_test_result <- t.test(variable_of_interest_sham, variable_of_interest_ab)
+      t_test_result <- t.test(variable_of_interest_sham, variable_of_interest_orab)
       
       # Extract the relevant values
       t_statistic <- t_test_result$statistic
@@ -39,18 +39,18 @@ perform_t_test <- function(processed_data, variable_of_interest, output_csv_path
       conf_low <- t_test_result$conf.int[1]
       conf_high <- t_test_result$conf.int[2]
       mean_group1 <- mean(variable_of_interest_sham, na.rm = TRUE)
-      mean_group2 <- mean(variable_of_interest_ab, na.rm = TRUE)
+      mean_group2 <- mean(variable_of_interest_orab, na.rm = TRUE)
       
       # Create a result data frame
       test_result <- data.frame(
         variable = variable_of_interest,
-        time_point = time_point,
+        Timepoint = Timepoint,
         t_statistic = t_statistic,
         p_value = p_value,
         conf_low = conf_low,
         conf_high = conf_high,
         mean_sham = mean_group1,
-        mean_ab = mean_group2, 
+        mean_orab = mean_group2, 
         stringsAsFactors = FALSE
       )
       
@@ -67,7 +67,7 @@ perform_t_test <- function(processed_data, variable_of_interest, output_csv_path
     
     # Merge new results with existing results, updating duplicates
     merged_results <- existing_results %>%
-      filter(!((time_point %in% results_df$time_point) & (variable %in% results_df$variable))) %>%
+      filter(!((Timepoint %in% results_df$Timepoint) & (variable %in% results_df$variable))) %>%
       bind_rows(results_df)
   } else {
     # If no existing file, use the new results

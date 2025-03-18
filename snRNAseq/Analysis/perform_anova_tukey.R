@@ -11,14 +11,14 @@ library(dplyr)
 perform_anova_tukey_test <- function(processed_data, variable_of_interest, anova_csv_path, anova_xlsx_path, tukey_csv_path, tukey_xlsx_path) {
   
   # Update this formula to include the interaction term
-  formula <- as.formula(paste(variable_of_interest, "~ condition + time_point + condition:time_point"))
+  formula <- as.formula(paste(variable_of_interest, "~ Condition + Timepoint + Condition:Timepoint"))
   
   # Perform the ANOVA
   anova_result <- aov(formula, data = processed_data)
   anova_summary <- summary(anova_result)
   
   # Perform Tukey's HSD post-hoc test
-  tukey_result <- TukeyHSD(anova_result, "condition:time_point")
+  tukey_result <- TukeyHSD(anova_result, "Condition:Timepoint")
   
   # Extract ANOVA summary into a data frame
   anova_df <- data.frame(
@@ -33,7 +33,7 @@ perform_anova_tukey_test <- function(processed_data, variable_of_interest, anova
   )
   
   # Extract Tukey's HSD results into a data frame
-  tukey_df <- as.data.frame(tukey_result$`condition:time_point`, stringsAsFactors = FALSE)
+  tukey_df <- as.data.frame(tukey_result$`Condition:Timepoint`, stringsAsFactors = FALSE)
   tukey_df$comparison <- rownames(tukey_df)
   rownames(tukey_df) <- NULL
   tukey_df <- tukey_df %>%
