@@ -157,7 +157,7 @@ saveRDS(mouse_1d_vcm, file = "C:/Users/Labuser/snRNAseq/tmp/mouse_1d_vcm.Rds")
 Idents(mouse_1d_vcm) <- mouse_1d_vcm@meta.data$orig.ident
 
 # Find differentially expressed genes
-mouse_1d_vcm_markers <- FindMarkers(mouse_1d_vcm, ident.1 = "1 Day - ORAB", ident.2 = "1 Day - SHAM")
+mouse_1d_vcm_markers <- FindMarkers(mouse_1d_vcm, ident.1 = "1 Day - ORAB", ident.2 = "1 Day - SHAM", logfc.threshold = 0)
 
 mouse_1d_vcm_markers_all_genes <- mouse_1d_vcm_markers %>%
   tibble::rownames_to_column(var = "gene") %>%
@@ -169,4 +169,4 @@ write.xlsx(mouse_1d_vcm_markers_all_genes, file = "mouse_1d_vcm_markers_all_gene
 mouse_1d_vcm_markers_significant_genes <- mouse_1d_vcm_markers %>%
   dplyr::filter(p_val_adj < 0.05) %>%
   arrange(desc(abs(avg_log2FC)))
-write.xlsx(mouse_1d_vcm_markers_significant_genes, file = "mouse_1d_vcm_markers_significant_genes.xlsx") # Save data f
+write.xlsx(mouse_1d_vcm_markers_significant_genes, file = "mouse_1d_vcm_markers_significant_genes.xlsx")

@@ -59,20 +59,20 @@ TP52 <- CreateSeuratObject(
 counts <- Seurat::Read10X_h5("W:/CardioTarget/Multiome seq data/GCF0742_GCF0795_CellRanger/Sample2-TP511B/outs/filtered_feature_bc_matrix.h5")
 TP511 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "3 Weeks - AB"
+  assay = "RNA", project = "3 Weeks - ORAB"
 )
 
 counts <- Read10X_h5("W:/CardioTarget/Multiome seq data/TP51-3/outs/filtered_feature_bc_matrix.h5")
 TP513 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "3 Weeks - AB"
+  assay = "RNA", project = "3 Weeks - ORAB"
 )
 
 
 counts <- Read10X_h5("W:/CardioTarget/Multiome seq data/GCF0742_GCF0795_CellRanger/Sample4-TP62A/outs/filtered_feature_bc_matrix.h5")
 TP62 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "3 Weeks - AB"
+  assay = "RNA", project = "3 Weeks - ORAB"
 )
 
 
@@ -157,7 +157,7 @@ SaveH5Seurat(mouse_3w_vcm,
 Idents(mouse_3w_vcm) <- mouse_3w_vcm@meta.data$orig.ident
 
 # Find differentially expressed genes
-mouse_3w_vcm_markers <- FindMarkers(mouse_3w_vcm, ident.1 = "3 Weeks - AB", ident.2 = "3 Weeks - SHAM")
+mouse_3w_vcm_markers <- FindMarkers(mouse_3w_vcm, ident.1 = "3 Weeks - ORAB", ident.2 = "3 Weeks - SHAM", logfc.threshold = 0)
 
 mouse_3w_vcm_markers_all_genes <- mouse_3w_vcm_markers %>%
   tibble::rownames_to_column(var = "gene") %>%

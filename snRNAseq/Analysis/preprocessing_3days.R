@@ -57,19 +57,19 @@ TP115 <- CreateSeuratObject(
 counts <- Read10X_h5("W:/CardioTarget/Multiome seq data/TP9-2/outs/filtered_feature_bc_matrix.h5")
 TP92 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "3 Days - AB"
+  assay = "RNA", project = "3 Days - ORAB"
 )
 
 counts <- Read10X_h5("W:/CardioTarget/Multiome seq data/TP10-2/outs/filtered_feature_bc_matrix.h5")
 TP102 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "3 Days - AB"
+  assay = "RNA", project = "3 Days - ORAB"
 )
 
 counts <- Read10X_h5("W:/CardioTarget/Multiome seq data/TP11-1A/outs/filtered_feature_bc_matrix.h5")
 TP111 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "3 Days - AB"
+  assay = "RNA", project = "3 Days - ORAB"
 )
 
 
@@ -156,7 +156,7 @@ SaveH5Seurat(mouse_3d_vcm,
 Idents(mouse_3d_vcm) <- mouse_3d_vcm@meta.data$orig.ident
 
 # Find differentially expressed genes
-mouse_3d_vcm_markers <- FindMarkers(mouse_3d_vcm, ident.1 = "3 Days - AB", ident.2 = "3 Days - SHAM")
+mouse_3d_vcm_markers <- FindMarkers(mouse_3d_vcm, ident.1 = "3 Days - ORAB", ident.2 = "3 Days - SHAM", logfc.threshold = 0)
 
 mouse_3d_vcm_markers_all_genes <- mouse_3d_vcm_markers %>%
   tibble::rownames_to_column(var = "gene") %>%

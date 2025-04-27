@@ -56,19 +56,19 @@ TP265 <- CreateSeuratObject(
 counts <- Seurat::Read10X_h5("D://MultiomeSeq/TP23-1/outs/filtered_feature_bc_matrix.h5")
 TP231 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "12 Hours - AB"
+  assay = "RNA", project = "12 Hours - ORAB"
 )
 
 counts <- Read10X_h5("D://MultiomeSeq/TP24-5/outs/filtered_feature_bc_matrix.h5")
 TP245 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "12 Hours - AB"
+  assay = "RNA", project = "12 Hours - ORAB"
 )
 
 counts <- Read10X_h5("D://MultiomeSeq/TP26-4/outs/filtered_feature_bc_matrix.h5")
 TP264 <- CreateSeuratObject(
   counts = counts$`Gene Expression`,
-  assay = "RNA", project = "12 Hours - AB"
+  assay = "RNA", project = "12 Hours - ORAB"
 )
 
 
@@ -158,7 +158,7 @@ saveRDS(mouse_12h_vcm, file = "C:/Users/Labuser/snRNAseq/tmp/mouse_12h_vcm.Rds")
 Idents(mouse_12h_vcm) <- mouse_12h_vcm@meta.data$orig.ident
 
 # Find differentially expressed genes
-mouse_12h_vcm_markers <- FindMarkers(mouse_12h_vcm, ident.1 = "12 Hours - AB", ident.2 = "12 Hours - SHAM")
+mouse_12h_vcm_markers <- FindMarkers(mouse_12h_vcm, ident.1 = "12 Hours - ORAB", ident.2 = "12 Hours - SHAM", logfc.threshold = 0)
 
 mouse_12h_vcm_markers_all_genes <- mouse_12h_vcm_markers %>%
   tibble::rownames_to_column(var = "gene") %>%

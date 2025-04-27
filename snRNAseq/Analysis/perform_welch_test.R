@@ -13,15 +13,15 @@ perform_welch_test_for_timepoint <- function(data_subset, variable_of_interest) 
   variable_of_interest_sham <- data_subset %>%
     filter(Condition == 'SHAM') %>%
     pull(!!sym(variable_of_interest))
-  
+
   variable_of_interest_orab <- data_subset %>%
     filter(Condition == 'ORAB') %>%
     pull(!!sym(variable_of_interest))
-  
+
   if (length(variable_of_interest_sham) > 0 & length(variable_of_interest_orab) > 0) {
     # Perform the Welch's t-test
     welch_test_result <- t.test(variable_of_interest_sham, variable_of_interest_orab, var.equal = FALSE)
-    
+
     # Extract the relevant values into a data frame
     return(data.frame(
       variable = variable_of_interest,

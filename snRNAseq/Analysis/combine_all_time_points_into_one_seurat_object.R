@@ -9,20 +9,20 @@ library(ggplot2)
 library(patchwork)
 
 # Load individual Seurat objects
-# mouse_vcm_6h <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_6h_vcm.Rds")
-# mouse_vcm_12h <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_12h_vcm.Rds")
-# mouse_vcm_1d <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_1d_vcm.Rds")
-# mouse_vcm_3d <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3d.Rds")
-# mouse_vcm_1w <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_1w.Rds")
-# mouse_vcm_3w <- readRDS("C:/Users/siljeew/snRNAseq/tmp/mouse_vcm_3w.Rds")
+mouse_vcm_6h <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_6h_vcm.Rds")
+mouse_vcm_12h <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_12h_vcm.Rds")
+mouse_vcm_1d <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_1d_vcm.Rds")
+mouse_vcm_3d <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_vcm_3d.Rds")
+mouse_vcm_1w <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_vcm_1w.Rds")
+mouse_vcm_3w <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_vcm_3w.Rds")
 
-# If already in the environment
-mouse_vcm_6h <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_6h_vcm.Rds")
-mouse_vcm_12h <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_12h_vcm.Rds")
-mouse_vcm_1d <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_1d_vcm.Rds")
-mouse_vcm_3d <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_3d.Rds")
-mouse_vcm_1w <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_1w.Rds")
-mouse_vcm_3w <- readRDS("C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_3w.Rds")
+# # If already in the environment
+# mouse_vcm_6h <- readRDS("C:/Users/Labuser/master_project/snRNAseq/tmp/mouse_6h_vcm.Rds")
+# mouse_vcm_12h <- readRDS("C:/Users/Labuser/master_project/snRNAseq/tmp/mouse_12h_vcm.Rds")
+# mouse_vcm_1d <- readRDS("C:/Users/Labuser/master_project/snRNAseq/tmp/mouse_1d_vcm.Rds")
+# mouse_vcm_3d <- readRDS("C:/Users/Labuser/master_project/snRNAseq/tmp/mouse_vcm_3d.Rds")
+# mouse_vcm_1w <- readRDS("C:/Users/Labuser/master_project/snRNAseq/tmp/mouse_vcm_1w.Rds")
+# mouse_vcm_3w <- readRDS("C:/Users/Labuser/master_project/snRNAseq/tmp/mouse_vcm_3w.Rds")
 
 
 # Merge Seurat objects
@@ -61,6 +61,7 @@ SaveH5Seurat(mouse_vcm_all_time_points_join_layers, filename = "C:/Users/Labuser
 
 # Save Seurat object in .Rds format
 saveRDS(mouse_vcm_all_time_points_join_layers, "C:/Users/Labuser/snRNAseq/tmp/mouse_vcm_all_time_points_join_layers.Rds")
+
 
 
 # Create UMAP plot

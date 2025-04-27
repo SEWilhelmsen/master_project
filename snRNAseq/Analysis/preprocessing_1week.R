@@ -152,7 +152,7 @@ tail(mouse_1w_vcm, 5)
 Idents(mouse_1w_vcm) <- mouse_1w_vcm@meta.data$orig.ident
 
 # Find differentially expressed genes
-mouse_1w_vcm_markers <- FindMarkers(mouse_1w_vcm, ident.1 = "1 Week - SHAM", ident.2 = "1 Week - AB")
+mouse_1w_vcm_markers <- FindMarkers(mouse_1w_vcm, ident.1 = "1 Week - SHAM", ident.2 = "1 Week - AB", logfc.threshold = 0)
     
 mouse_1w_vcm_markers_all_genes <- mouse_1w_vcm_markers %>%
     tibble::rownames_to_column(var = "gene") %>%

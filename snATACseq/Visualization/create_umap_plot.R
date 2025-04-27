@@ -2,6 +2,8 @@
 
 # After doing add_atac_layer_to_seurat_object.R
 
+
+
 # Prepare data
 SeuratObj <- RunTFIDF(SeuratObj) # Normalize data
 SeuratObj <- FindTopFeatures(SeuratObj, min.cutoff = 'q0') # Find features for dimensionality reduction

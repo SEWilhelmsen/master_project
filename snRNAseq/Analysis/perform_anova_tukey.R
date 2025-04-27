@@ -14,11 +14,10 @@ perform_anova_tukey_test <- function(processed_data, variable_of_interest, anova
   formula <- as.formula(paste(variable_of_interest, "~ Condition + Timepoint + Condition:Timepoint"))
   
   # Perform the ANOVA
-  anova_result <- aov(formula, data = processed_data)
-  anova_summary <- summary(anova_result)
+  anova_result <- aov(formula, data = processed_data, )
   
-  # Perform Tukey's HSD post-hoc test
-  tukey_result <- TukeyHSD(anova_result, "Condition:Timepoint")
+  anova_summary <- summary(anova_result)
+  print(anova_summary)
   
   # Extract ANOVA summary into a data frame
   anova_df <- data.frame(
@@ -31,6 +30,9 @@ perform_anova_tukey_test <- function(processed_data, variable_of_interest, anova
     p_value = anova_summary[[1]]$"Pr(>F)",
     stringsAsFactors = FALSE
   )
+  
+  # Perform Tukey's HSD post-hoc test
+  tukey_result <- TukeyHSD(anova_result, "Condition:Timepoint")
   
   # Extract Tukey's HSD results into a data frame
   tukey_df <- as.data.frame(tukey_result$`Condition:Timepoint`, stringsAsFactors = FALSE)
@@ -49,6 +51,7 @@ perform_anova_tukey_test <- function(processed_data, variable_of_interest, anova
   tukey_df <- tukey_df %>%
     select(comparison, everything())
   
+
   # Save the ANOVA results
   if (nrow(anova_df) > 0) {
     
@@ -107,9 +110,7 @@ perform_anova_tukey_test <- function(processed_data, variable_of_interest, anova
     message("No valid Tukey's HSD test results were generated.")
   }
   
+  
   # Return the ANOVA and Tukey's HSD result objects for further analysis
   return(list(anova_result = anova_result, tukey_result = tukey_result))
 }
-
-
-

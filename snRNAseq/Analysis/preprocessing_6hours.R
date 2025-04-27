@@ -159,7 +159,7 @@ saveRDS(mouse_6h_vcm, file = "C:/Users/Labuser/snRNAseq/tmp/mouse_6h_vcm.Rds")
 Idents(mouse_6h_vcm) <- mouse_6h_vcm@meta.data$orig.ident
 
 # Find differentially expressed genes
-mouse_6h_vcm_markers <- FindMarkers(mouse_6h_vcm, ident.1 = "6 Hours - AB", ident.2 = "6 Hours - SHAM")
+mouse_6h_vcm_markers <- FindMarkers(mouse_6h_vcm, ident.1 = "6 Hours - AB", ident.2 = "6 Hours - SHAM", logfc.threshold = 0)
 
 mouse_6h_vcm_markers_all_genes <- mouse_6h_vcm_markers %>%
   tibble::rownames_to_column(var = "gene") %>%

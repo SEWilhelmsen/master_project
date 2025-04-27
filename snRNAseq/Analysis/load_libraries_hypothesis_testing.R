@@ -12,4 +12,8 @@ load_libraries <- function() {
   library(viridis)
   library(hrbrthemes)
   library(broom)
+  library(openxlsx)
+  library(tidyr)
+  library(car)
+  library(summarytools)
 }

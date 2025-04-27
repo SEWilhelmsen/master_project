@@ -1,13 +1,6 @@
-## Fucntions to combine all genes from .xlsx, only the column:  avg_log2FC, at all time points 
+# Fucntions to combine all genes from .xlsx, only the column:  avg_log2FC, at all time points 
 # Silje Wilhelmsen
 
-
-# # Load necessary libraries
-# library(readxl)
-# library(dplyr)
-# library(tidyr)
-library(xlsx)
-install.packages("xlsx")
 
 
 # Function to read and process each file

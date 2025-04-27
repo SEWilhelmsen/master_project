@@ -17,10 +17,10 @@ perform_t_test <- function(data, group_col, value_col, time_col, go_process_of_i
     data_subset <- split_data[[time_point]]
     
     sham_values <- data_subset %>% filter(!!sym(group_col) == "SHAM") %>% pull(!!sym(value_col))
-    ab_values <- data_subset %>% filter(!!sym(group_col) == "ORAB") %>% pull(!!sym(value_col))
+    orab_values <- data_subset %>% filter(!!sym(group_col) == "ORAB") %>% pull(!!sym(value_col))
     
-    if (length(sham_values) >= 2 & length(ab_values) >= 2) {
-      t_test_result <- t.test(sham_values, ab_values)
+    if (length(sham_values) >= 2 & length(orab_values) >= 2) {
+      t_test_result <- t.test(sham_values, orab_values)
       
       results[[time_point]] <- data.frame(
         process = go_process_of_interest,
@@ -32,13 +32,16 @@ perform_t_test <- function(data, group_col, value_col, time_col, go_process_of_i
         conf_low = t_test_result$conf.int[1],
         conf_high = t_test_result$conf.int[2],
         mean_sham = mean(sham_values, na.rm = TRUE),
-        mean_ab = mean(ab_values, na.rm = TRUE),
+        mean_orab = mean(orab_values, na.rm = TRUE),
         stringsAsFactors = FALSE
       )
     }
   }
   
   results_df <- bind_rows(results)
+  
+  # Perform Benjamini-Hochberg adjustment for p-values
+  results_df$p_adj <- p.adjust(results_df$p_value, method = "BH")
   
   # Update existing results
   if (file.exists(output_csv_path)) {
