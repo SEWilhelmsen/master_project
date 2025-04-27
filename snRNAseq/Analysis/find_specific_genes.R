@@ -27,7 +27,6 @@ library(readr)
 
 # Convert gene_list to uppercase to ensure uniform formatting
 gene_list <- list(
-<<<<<<< HEAD
   glycolysis = toupper(c("HK1", "GCK", "PFKM")),
   pdh = toupper(c("PDHA1", "DLD", "DLAT",  "PDHX")),
   tca = toupper(c("IDH1", "IDH2", "IDH3B")),
@@ -40,29 +39,10 @@ gene_list <- list(
   regulation_of_ketone_metabolic_process = toupper(c("AVP", "SLC45A3", "PLIN5")),
   hydroxybutyrate_dehydrogenase_activity = toupper(c("BDH1", "BDH2")),
   ketone_catabolism = toupper(c("OXCT1", "OXCT2", "OXCT2A", "OXCT2B")),
-=======
-  glycolysis = toupper(c("HK1", "HK2", "GCK", "PFK1", "PFKM", "PK")),
-  pdh = toupper(c("PDH", "PDHA1", "PDHA2", "DLAT", "DLD", "PDK1", "PDK2",  "PDHX")),
-  tca = toupper(c("CS", "OGDH", "OGDC", "DLST", "DLD", "IDH1", "IDH2", "IDH3A", "IDH3G", "IDH3B")),
-  cm_markers = toupper(c("ACTC1", "TPM", "RYR2",	"MYH6", "ATP2A2", "NPPA", "TNNC1", "ACTA1")),
-  chylomicron_clearance = toupper(c("APOC1", "APOC2", "APOC3", "APOE", "LIPC", "GPIHBP")),
-  uncoupling_proteins = toupper(c("SLC25A4", "SLC25A5", "UCP1", "UCP2", "UCP3")),
-  glucose_transmembrane_transport = toupper(c("SLC2A4", "SLC27A1", "SLC27A4")),
-  fatty_acid_transport = toupper(c("FABP3", "FABPH", "CD36", "FATP4", "CACP", "MCAT")),
-  fao = toupper(c("CPT1B", "CPT1A", "ACADVL", "CPT2")),
-  regulation_of_ketone_metabolic_process = toupper(c("AVP", "SLC45A3", "PLIN5")),
-  hydroxybutyrate_dehydrogenase_activity = toupper(c("BDH1", "BDH2")),
-  ketone_catabolism = toupper(c("ACAT1", "OXCT1", "OXCT2", "OXCT2A", "OXCT2B")),
->>>>>>> 7df848ad59037d1ccdbeb933fda380e63ccfea21
   protein_transmembrane_transport = toupper(c("")),
   cardiac_muscle_contraction = toupper(c("ATP2A2", "TNNI3","ATP1A1", "ATP1A2", "ATP1B1", "ATP2A1")),
   negative_regulation_of_cardiac_muscle_contraction = toupper(c("ADCY10", "BIN1", "PDE5A", "SRI", "ZC3H12A", "PIK3CG","MIR3")),
   positive_regulation_of_cardiac_muscle_contraction = toupper(c("ADRA1A", "HSP90AA1", "KCNQ1", "RGS2")),
-<<<<<<< HEAD
-=======
-  #calcium_signaling_pathway = toupper(c()),
-  #cardiac_muscle_tissue_growth = toupper(c()),
->>>>>>> 7df848ad59037d1ccdbeb933fda380e63ccfea21
   regulation_of_cardiac_calcium_signaling = toupper(c("ATP1A2", "ATP1B1", "ATP2A2", "CALM1", "CALM2", "CALM3", "PLN", "TNNI3")),
   stress_markers = toupper(c("NPPA", "NPPB", "MYH7", "ANKRD1")),
   negative_regulation_of_creb_transcription_factor_activity = toupper(c("DDIT3", "SIK1", "ADGRG3", "EIF2AK4")),
