@@ -1,14 +1,9 @@
 # Create plot of specific genes to combine with plot of go_process
 # Silje Wilhelmsen
 
-# Load required libraries
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(readr)
+
 
 # Combine the data processing and plotting into a single function for simplicity
-
 create_go_genes_plot <- function(data_avg_log2fc, go_process_of_interest_genes) {  
   
   # Subset the data to include only genes in go_process_of_interest_genes
@@ -19,30 +14,39 @@ create_go_genes_plot <- function(data_avg_log2fc, go_process_of_interest_genes) 
   data_avg_log2fc_genes_of_interest_go_process_long <- data_avg_log2fc_genes_of_interest %>%
     pivot_longer(cols = -gene, names_to = "time_point", values_to = "avg_log2fc")
   
-  # Set the correct order of columns 
+  # Set the correct order of timepoints 
   data_avg_log2fc_genes_of_interest_go_process_long$time_point <- factor(data_avg_log2fc_genes_of_interest_go_process_long$time_point, 
-                                                                         levels = c("avg_log2fc_6_hours",
-                                                                                    "avg_log2fc_12_hours",
-                                                                                    "avg_log2fc_1_days",
-                                                                                    "avg_log2fc_3_days",
-                                                                                    "avg_log2fc_1_week",
-                                                                                    "avg_log2fc_3_weeks"))
+                                                                         levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
   
-  # Create the ggplot for glycolysis genes
+  
+  # Create the ggplot
   go_genes_plot <- ggplot(data_avg_log2fc_genes_of_interest_go_process_long, 
                           aes(x = time_point, y = avg_log2fc, group = gene, color = gene)) +
-    geom_line(size = 1) +
-    geom_point(size = 2) +
+    geom_line(linewidth = 1.5) +
+    geom_point(size = 3) +
+    labs(x = NULL,
+         y = "Average log2FC expression",
+         color = "Genes",
+         title = "Fatty Acid B-Oxidation Genes") +
     scale_color_brewer(palette = "Set1") +
-    xlab(NULL) +
-    ylab("Average log 2 fold change expression") +
-    #ggtitle("Average log 2 fold change expression of specific genes") +
+    scale_y_continuous(limits = c(-1.5, 1.5)) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
-    theme_minimal() +
-    # theme(axis.title.x = element_blank(), # These three lines excludes the x-axis
-    #       axis.text.x = element_blank(),
-    #       axis.ticks.x = element_blank()) +
-    scale_x_discrete(labels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
-  
+    theme_classic() +
+    theme(axis.text.x = element_text(hjust = 0.5, size = 18, color = "black", margin = margin(t = 15)), 
+          axis.text.y = element_text(size = 26, colour = "black"), 
+          axis.title.x = element_blank(),
+          axis.title.y = element_text(size = 26, margin = margin(r = 15)), # Change margins: r = right, b = bottom, t = top, l = left
+          plot.title = element_text(size = 26, margin = margin(b = 20)),
+          legend.title = element_text(size = 30),
+          legend.text = element_text(size = 30),
+          axis.line.y.right = element_blank()) 
+      
+
   print(go_genes_plot)
 }
+
+# gene_plot_fatty_acid_uptake <- create_go_genes_plot(data_avg_log2fc, go_process_of_interest_genes)
+# print(gene_plot_fatty_acid_uptake)
+
+gene_plot_b_oxidation <- create_go_genes_plot(data_avg_log2fc, go_process_of_interest_genes)
+print(gene_plot_b_oxidation)
