@@ -2,24 +2,21 @@
 # silje Wilhelmsen
 
 
-# Source scripts
-source("C:/Users/siljeew/Master_project/Phenotypic_data/prepare_fibrosis_data.R") # Output: fibrosis_data
-#source("C:/Users/siljeew/Master_project/Phenotypic_data/prepare_cell_size_data.R") # output: cell_size_data_filtered
 
-# Load libraries
-library(openxlsx)
-library(ggplot2)
-library(readxl)
-library(dplyr)
-library(tidyverse)
-library(writexl)
-library(tidyr)
-library(car)
-library(summarytools)
+# Preparation
+###############################################################################
+source("C:/Users/siljeew/Master_project/Phenotypic_data/Analysis/load_libraries_for_plots_phenotype_data.R")
+load_libraries()
+
+
+#source("C:/Users/siljeew/Master_project/Phenotypic_data/Analysis/prepare_fibrosis_data.R") # Output: fibrosis_data
+# Preparational scripts
+#source("C:/Users/siljeew/Master_project/Phenotypic_data/Analysis/prepare_cell_size_data.R") # output: cell_size_data_filtered
+
 
 # Load data and set parameters
 # If not created cell size data, load the saved file
-#data <- read_excel("Data/cell_size_data_filtered.xlsx")
+cell_size_data_filtered <- read_excel("C:/Users/siljeew/Master_project/Phenotypic_data/Data/cell_size_data_filtered.xlsx")
 data <- cell_size_data_filtered
 
 # data <- fibrosis_data
@@ -29,25 +26,48 @@ output_dir_plot <- "C:/Users/siljeew/Master_project/Phenotypic_data/Plots/"
 
 variable_of_interest <- 'width_um'
 data$`width_um` <- as.numeric(data$`width_um`)
-#data <- data %>% filter(area_um2 < 10000)
-#data <- data %>% filter(length_um < 1000)
-   
 data <- data %>% filter(width_um < 100)
+
+# variable_of_interest <- 'area_um2'
+# data$`area_um2` <- as.numeric(data$`area_um2`)
+# data <- data %>% filter(area_um2 < 10000)
+
+
+# colnames(data)
+# variable_of_interest <- 'length_um'
+# data$length_um <- as.numeric(data$length_um)
+# data <- data %>% filter(length_um < 1000)
+
 
 
 # Investigate normal distribution
 ##########################################################################
 histogram <- ggplot(data, aes(x = !!sym(variable_of_interest), fill = Condition)) +
-  geom_histogram(binwidth = 0.5, color = "black", alpha = 0.7, position = "identity") + #For cell size set binwidth to 500
+  geom_histogram(binwidth = 10, color = "lightgrey", alpha = 0.7, position = "identity") + #For cell size set binwidth to 500
   labs(title = paste("Histogram of", variable_of_interest),
        x = variable_of_interest,
        y = "Frequency") +
-  facet_wrap(~ Timepoint, ncol = 6) +
+  facet_wrap(Condition ~ Timepoint, ncol = 6) +
   scale_fill_manual(values = c("SHAM" = "grey22", "ORAB" = "coral")) +
   theme_minimal()
 
 # Display the histogram
 print(histogram)
+
+# Width
+histogram_width <- ggplot(data, aes(x = !!sym(variable_of_interest), fill = Condition)) +
+  geom_histogram(binwidth = 10, color = "lightgrey", alpha = 0.7, position = "identity") + #For cell size set binwidth to 500
+  labs(title = paste("Histogram of", variable_of_interest),
+       x = variable_of_interest,
+       y = "Frequency") +
+  facet_wrap(Condition ~ Timepoint, ncol = 6) +
+  scale_fill_manual(values = c("SHAM" = "grey22", "ORAB" = "coral")) +
+  theme_minimal()
+
+# Display the histogram
+print(histogram_width)
+
+
 
 
 # Q-q-plot
@@ -118,12 +138,40 @@ print("Wilcoxon test results:")
 print(results_wilcox)
 
 
+# ANOVA + Tukey HSD
+###########################################################################
+table(data$variable_of_interest)
+
+table(processed_data$variable_of_interest)
+
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/perform_anova_tukey.R")
+processed_data <- data
+colnames(processed_data)
+View(processed_data)
+
+processed_data$length_um <- as.numeric(processed_data$length_um)
+processed_data$Condition <- as.factor(processed_data$Condition)
+processed_data$Timepoint <- as.factor(processed_data$Timepoint)
+
+output_dir <- "C:/Users/siljeew/Master_project/Phenotypic_data/Data"
+
+anova_csv_path <- file.path(output_dir, "anova_results_cell_size.csv")
+anova_xlsx_path <- file.path(output_dir, "anova_results_cell_size.xlsx")
+tukey_csv_path <- file.path(output_dir, "tukey_results_cell_size.csv")
+tukey_xlsx_path <- file.path(output_dir, "tukey_results_cell_size.xlsx")
+
+perform_anova_tukey_test(processed_data, variable_of_interest, anova_csv_path, anova_xlsx_path, tukey_csv_path, tukey_xlsx_path)
+
+
+
+data$Timepoint <- as.factor(data$Timepoint)
+
+ggplot(data, aes(x = Timepoint, y = length_um, fill = Condition)) +
+  geom_violin()
+
 
 
 ################################################################################
-
-
-
 # Investigate descriptional statistics
 freq(data)
 

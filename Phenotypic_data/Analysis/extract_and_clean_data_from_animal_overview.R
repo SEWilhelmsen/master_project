@@ -79,3 +79,4 @@ process_excel_data <- function(file_path, sheet = 1, output_view = FALSE) {
   
   return(cleaned_data)
 }
+
