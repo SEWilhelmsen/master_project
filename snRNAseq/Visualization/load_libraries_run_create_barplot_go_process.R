@@ -1,5 +1,6 @@
-# Load libraries for run_create_barplot_go_process
+# Load libraries for creating a barplot of gene ontology process expression level
 # Silje Wilhelmsen
+
 
 library(dplyr)
 library(tidyr)
@@ -15,3 +16,6 @@ library(cowplot)
 library(tibble)
 library(SeuratObject)
 library(tidyverse)
+library(ggbreak)
+library(org.Hs.eg.db)
+library(readxl)

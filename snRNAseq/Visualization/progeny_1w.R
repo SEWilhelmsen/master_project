@@ -30,17 +30,11 @@ library(openxlsx)
 mouse_1w_vcm_with_stress_status <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_1w_vcm_with_stress_status.Rds")
 
 # Run Progeny Analysis
-
 pathway_activity_scores <- progeny(mouse_1w_vcm_with_stress_status, scale = FALSE, organism = "Mouse", top = 500)
-
-# Scale Pathway Activity Scores
 scaled_pathway_scores <- scale(pathway_activity_scores)
-
-# Convert Scores to Data Frame
 progeny_scores_df <- as.data.frame(t(scaled_pathway_scores)) %>%
   tibble::rownames_to_column("Cell") %>%
   tidyr::gather(Pathway, Activity, -Cell)
-
 progeny_scores_df <- progeny_scores_df %>%
   rename(Pathway = Cell, Cell = Pathway)
 
@@ -172,27 +166,48 @@ activity_filtered <- activity_comparison %>%
 # Determine the maximum absolute difference
 max_diff <- max(abs(activity_filtered$difference), na.rm = TRUE)
 
+activity_filtered_1w <- activity_filtered
+
+# Import P-adjusted label
+activity_filtered_1w <- activity_filtered_1w %>%
+  left_join(updated_results_df %>% select(Pathway, Timepoint, p_adjusted_label), 
+            by = c("Pathway", "Timepoint"))
+
+# Remove NAs
+p_adj_label_1w <- activity_filtered_1w %>%
+  filter(p_adjusted_label != "ns") %>%
+  mutate(y_position = difference + 0.01)
+
 # Create the plot
-ggplot(activity_filtered, aes(x = difference, y = Pathway, fill = difference > 0)) +
+progeny_1w <- ggplot(activity_filtered_1w, aes(x = Pathway, y = difference, fill = difference > 0)) +
   geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("TRUE" = "pink", "FALSE" = "cadetblue")) +
-  facet_wrap(~ Timepoint, scales = "free_y") +
-  theme_light() +
-  theme(
-    legend.position = "none",
-    panel.border = element_blank(),
-    axis.title.x = element_text(size = 12),
-    axis.title.y = element_blank(),
-    axis.text.y = element_text(size = 10)
-  )  +
-  ylab("Pathways") +
-  xlab("Difference in activity score") +
-  xlim(-0.3, 0.3)
-  #xlim(-max_diff, max_diff)  # Set x-axis limits symmetrically around zero 
+  labs(x = "", 
+       y = "Difference in activity score",
+       title = "SHAM vs Stressed CM at 1 Week",
+       fill = "Condition") +
+  scale_fill_manual(
+    values = c("TRUE" = "coral", "FALSE" = "grey22"),
+    labels = c("Stressed CM", "SHAM CM"),
+    breaks = c(TRUE, FALSE)
+  ) +
+  #guides(fill = guide_legend(override.aes = list(alpha = 1))) +  
+  guides(fill = "none") +
+  theme_classic() +
+  theme(axis.text.x = element_text(hjust = 0.5, size = 16, color = "black", margin = margin(t = 15)), 
+        axis.text.y = element_text(size = 26, colour = "black"), 
+        axis.title.y = element_text(size = 26),
+        axis.title.x = element_blank(), 
+        plot.title = element_text(size = 26, margin = margin(b = 20)),
+        legend.title = element_text(size = 26),
+        legend.text = element_text(size = 26),
+        panel.border = element_blank(),
+        axis.line.y.right = element_blank()) +
+  geom_text(data = p_adj_label_1w, aes(x = Pathway, y = y_position, label = p_adjusted_label), 
+            size = 10, color = "black") +
+  ylim(-0.2, 0.25)
 
+progeny_1w
 
-
-head(progeny_scores_df)
 
 
 # Perform t-test
