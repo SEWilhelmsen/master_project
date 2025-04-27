@@ -15,8 +15,14 @@ perform_kruskal_dunn <- function(data, variable_of_interest, output_csv_path, ou
   data <- data %>%
     mutate(group = paste(Condition, Timepoint, sep = "_"))
   
+<<<<<<< HEAD
   # Perform Kruskal-Wallis test
   kruskal_result <- kruskal.test(as.formula(paste(variable_of_interest, "~ group")), data = data)
+=======
+  # Create a new column 'group' by combining 'condition' and 'time_point'
+  processed_data <- processed_data %>%
+    mutate(group = paste(Condition, Timepoint, sep = "_"))
+>>>>>>> 7df848ad59037d1ccdbeb933fda380e63ccfea21
   
   if (kruskal_result$p.value < 0.05) {
     # If Kruskal-Wallis is significant, perform post-hoc Dunn's test

@@ -17,7 +17,11 @@ perform_t_test <- function(data, group_col, value_col, time_col, go_process_of_i
     data_subset <- split_data[[time_point]]
     
     sham_values <- data_subset %>% filter(!!sym(group_col) == "SHAM") %>% pull(!!sym(value_col))
+<<<<<<< HEAD
     orab_values <- data_subset %>% filter(!!sym(group_col) == "ORAB") %>% pull(!!sym(value_col))
+=======
+    ab_values <- data_subset %>% filter(!!sym(group_col) == "ORAB") %>% pull(!!sym(value_col))
+>>>>>>> 7df848ad59037d1ccdbeb933fda380e63ccfea21
     
     if (length(sham_values) >= 2 & length(orab_values) >= 2) {
       t_test_result <- t.test(sham_values, orab_values)

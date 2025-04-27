@@ -1,3 +1,12 @@
+Phenotypic_data/Data
+Phenotypic_data/Plots
+Phenotypic_data/Animal_overview_TP
+Phenotypic_data/.Rhistory
+Phenotypic_data/anova_results.csv
+Phenotypic_data/anova_results.xlsx
+Phenotypic_data/Fibrosis
+Phenotypic_data/tukey_results.csv
+Phenotypic_data/tukey_results.xlsx
 Presentasjoner
 .Rhistory
 03_Integration_Sample1-4_RNA-ATAC.R
@@ -59,3 +68,8 @@ snATACseq/preprocessing_12h.R
 snATACseq/preprocessing_based_on_csv.R
 snATACseq/preprocessing_from_yt.R
 snATACseq/test.R
+<<<<<<< HEAD
+=======
+.Rhistory
+03_Integration_Sample1-4_RNA-ATAC.R
+>>>>>>> 7df848ad59037d1ccdbeb933fda380e63ccfea21

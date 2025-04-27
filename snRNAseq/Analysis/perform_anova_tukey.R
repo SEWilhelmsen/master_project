@@ -16,8 +16,13 @@ perform_anova_tukey_test <- function(processed_data, variable_of_interest, anova
   # Perform the ANOVA
   anova_result <- aov(formula, data = processed_data, )
   
+<<<<<<< HEAD
   anova_summary <- summary(anova_result)
   print(anova_summary)
+=======
+  # Perform Tukey's HSD post-hoc test
+  tukey_result <- TukeyHSD(anova_result, "Condition:Timepoint")
+>>>>>>> 7df848ad59037d1ccdbeb933fda380e63ccfea21
   
   # Extract ANOVA summary into a data frame
   anova_df <- data.frame(
