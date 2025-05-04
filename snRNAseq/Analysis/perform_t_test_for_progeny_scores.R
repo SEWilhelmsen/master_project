@@ -1,9 +1,9 @@
 # t-test for progeny scores for one specific pathway
 # Silje Wilhelmsen
 
-# group1 <- "SHAM CM"
+group1 <- "SHAM CM"
 # group2 <- "Not stressed CM"
-# group2 <- "Stressed CM"
+group2 <- "Stressed CM"
 
 # Prepare a list to store the results
 t_test_results <- list()
