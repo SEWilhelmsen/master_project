@@ -56,6 +56,9 @@ snATACseq/Analysis/test2.R
 snATACseq/Analysis/preprocessing_from_yt.R
 snATACseq/Analysis/.Rhistory
 snATACseq/Analysis/test2.R
+snATACseq/Analysis/creb_test.R
+snATACseq/Analysis/preprocessing_6h_new.R
+snATACseq/Analysis/quality_control.R
 snATACseq/Data
 snATACseq/Plots
 snATACseq/tmp
@@ -72,6 +75,3 @@ snATACseq/preprocessing_12h.R
 snATACseq/preprocessing_based_on_csv.R
 snATACseq/preprocessing_from_yt.R
 snATACseq/test.R
-snATACseq/Analysis/creb_test.R
-snATACseq/Analysis/preprocessing_6h_new.R
-snATACseq/Analysis/quality_control.R
