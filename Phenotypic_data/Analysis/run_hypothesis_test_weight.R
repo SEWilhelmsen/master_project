@@ -176,6 +176,6 @@ print(pairwise_results)
 
 
 # Visualization
-# file.edit("C:/Users/siljeew/Master_project/Phenotypic_data/Analysis/create_boxplot_weight.R")
+file.edit("C:/Users/siljeew/Master_project/Phenotypic_data/Analysis/create_boxplot_weight.R")
 
 
