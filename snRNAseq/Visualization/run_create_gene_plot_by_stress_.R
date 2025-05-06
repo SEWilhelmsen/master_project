@@ -13,7 +13,7 @@ file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/perform_anova_
 
 
 # Specify the gene you’re interested in 
-gene_of_interest <- "IDH3B"  # Change to gene of interest
+gene_of_interest <- "CPT2"  # Change to gene of interest
 
 # Specify paths for ANOVA and Tukey HSD results
 output_csv_path <- "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/anova_tukey_gene_results.csv"
@@ -73,7 +73,7 @@ combined_data_long <- combined_data_long %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
 
 
-write.csv(combined_data_long, "C:/Users/siljeew/Master_project/snRNAseq/tmp/combined_data_long_hk1.csv") # Change gene
+# write.csv(combined_data_long, "C:/Users/siljeew/Master_project/snRNAseq/tmp/combined_data_long_hk1.csv") # Change gene
 
 
 # Perform anova and TukeyHSD
@@ -177,7 +177,7 @@ go_process_summary <- go_process_summary %>%
   mutate(Timepoint = as.character(Timepoint),
          Stress_Status = as.character(Stress_Status))
 
-view(anova_tukey_gene_results)
+# view(anova_tukey_gene_results)
 
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/insert_mean_anova_tukey_result_by_stress.R")
 
@@ -204,10 +204,12 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/insert_significance_la
 write_xlsx(go_process_summary, path = "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/go_process_summary_slc2a4.xlsx") # Change gene
 # Remember to verify that the stars in the plot corresponds to the t_test_gene_by_stress p_adj 
 
+
 #############################################################################################################
 write_xlsx(anova_tukey_mean, path = "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/anova_tukey_mean.xlsx") 
 write.csv(anova_tukey_mean, file = "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/anova_tukey_mean.csv")
 #############################################################################################################
+
 
 # To create a line plot, go here:
 file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_line_plot_one_gene_with_significance_by_stress.R")
