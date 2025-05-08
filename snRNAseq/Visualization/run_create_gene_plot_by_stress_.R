@@ -8,16 +8,16 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/load_libraries_ru
 # source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/perform_anova_tukey_one_gene_by_stress_status.R")
 
-file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/perform_anova_tukey_one_gene_by_stress_status.R")
+# file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/perform_anova_tukey_one_gene_by_stress_status.R")
 
 
 
 # Specify the gene you’re interested in 
-gene_of_interest <- "CPT2"  # Change to gene of interest
+gene_of_interest <- "CPT1A"  # Change to gene of interest
 
 # Specify paths for ANOVA and Tukey HSD results
-output_csv_path <- "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/anova_tukey_gene_results.csv"
-output_xlsx_path <- "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/anova_tukey_gene_results.xlsx"
+output_csv_path <- "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/anova_tukey_gene_results_new.csv"
+output_xlsx_path <- "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/anova_tukey_gene_results_new.xlsx"
 
 
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Gene_process"
@@ -73,7 +73,8 @@ combined_data_long <- combined_data_long %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
 
 
-# write.csv(combined_data_long, "C:/Users/siljeew/Master_project/snRNAseq/tmp/combined_data_long_hk1.csv") # Change gene
+write.csv(combined_data_long, "C:/Users/siljeew/Master_project/snRNAseq/tmp/combined_data_long_cpt1a.csv") # Change gene
+
 
 
 # Perform anova and TukeyHSD
@@ -201,7 +202,7 @@ anova_tukey_mean <- anova_tukey_mean %>%
 
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/insert_significance_label_to_go_process_summary_by_stress.R")
 
-write_xlsx(go_process_summary, path = "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/go_process_summary_slc2a4.xlsx") # Change gene
+write_xlsx(go_process_summary, path = "C:/Users/siljeew/Master_project/snRNAseq/Data/Stress_Status/go_process_summary_cpt1a.xlsx") # Change gene
 # Remember to verify that the stars in the plot corresponds to the t_test_gene_by_stress p_adj 
 
 

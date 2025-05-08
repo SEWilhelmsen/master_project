@@ -55,10 +55,10 @@ print(total_glucose_plot)
 
 
 # Save the combined plot—adjust width and height for space between plots
-ggsave(file.path(output_dir_plot, "total_glucose_plot.png"), plot = total_glucose_plot, width = 24, height = 28)
+ggsave(file.path(output_dir_plot, "total_glucose_plot_new.png"), plot = total_glucose_plot, width = 24, height = 28)
 
-ggsave(file.path(output_dir_plot, "total_glucose_plot.pdf"), plot = total_glucose_plot, width = 24, height = 28)
-openPDF(file.path(output_dir_plot, "total_glucose_plot.pdf"))
+ggsave(file.path(output_dir_plot, "total_glucose_plot_new.pdf"), plot = total_glucose_plot, width = 24, height = 28)
+openPDF(file.path(output_dir_plot, "total_glucose_plot_new.pdf"))
 
 
 

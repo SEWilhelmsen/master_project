@@ -45,7 +45,7 @@ total_ketone_plot <- (go_plot_hydroxybutyrate_dehydrogenase | go_plot_ketone_cat
 print(total_ketone_plot)
 
 # Save the combined plot—adjust width and height for space between plots
-ggsave(file.path(output_dir_plot, "total_ketone_plot.pdf"), plot = total_ketone_plot, width = 24, height = 22)
-openPDF(file.path(output_dir_plot, "total_ketone_plot.pdf"))
+ggsave(file.path(output_dir_plot, "total_ketone_plot_new.pdf"), plot = total_ketone_plot, width = 24, height = 22)
+openPDF(file.path(output_dir_plot, "total_ketone_plot_new.pdf"))
 
-ggsave(file.path(output_dir_plot, "total_ketone_plot.png"), plot = total_ketone_plot, width = 24, height = 22)
+ggsave(file.path(output_dir_plot, "total_ketone_plot_new.png"), plot = total_ketone_plot, width = 24, height = 22)

@@ -11,7 +11,7 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_fi
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/perform_t_test_for_go_process.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/perform_anova_tukey_for_go_process.R")
 source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/find_specific_genes.R")
-source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
+# source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
 
 file.edit("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
 file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
@@ -20,7 +20,7 @@ file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_fo
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'fatty_acid_transport' # Change process of interest 
+go_process_of_interest <- 'tca' # Change process of interest 
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Gene_process"
 
 # Ensure output plot directory exists

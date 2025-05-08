@@ -27,7 +27,7 @@ library(readr)
 
 # Convert gene_list to uppercase to ensure uniform formatting
 gene_list <- list(
-  glycolysis = toupper(c("HK1", "GCK", "PFKM")),
+  glycolysis = toupper(c("HK1", "HK2", "GCK", "PFKM")),
   pdh = toupper(c("PDHA1", "DLD", "DLAT",  "PDHX")),
   tca = toupper(c("IDH1", "IDH2", "IDH3B")),
   cm_markers = toupper(c("ACTC1", "TPM", "RYR2",	"MYH6", "ATP2A2", "NPPA", "TNNC1", "ACTA1")),
@@ -37,8 +37,8 @@ gene_list <- list(
   fatty_acid_transport = toupper(c("CD36")),
   b_oxidation = toupper(c("CPT1A", "CPT1B", "CPT2")),
   regulation_of_ketone_metabolic_process = toupper(c("AVP", "SLC45A3", "PLIN5")),
-  hydroxybutyrate_dehydrogenase_activity = toupper(c("BDH1", "BDH2")),
-  ketone_catabolism = toupper(c("OXCT1", "OXCT2", "OXCT2A", "OXCT2B")),
+  hydroxybutyrate_dehydrogenase_activity = toupper(c("BDH1")),
+  ketone_catabolism = toupper(c("OXCT1", "OXCT2A", "OXCT2B")),
   protein_transmembrane_transport = toupper(c("")),
   cardiac_muscle_contraction = toupper(c("ATP2A2", "TNNI3","ATP1A1", "ATP1A2", "ATP1B1", "ATP2A1")),
   negative_regulation_of_cardiac_muscle_contraction = toupper(c("ADCY10", "BIN1", "PDE5A", "SRI", "ZC3H12A", "PIK3CG","MIR3")),

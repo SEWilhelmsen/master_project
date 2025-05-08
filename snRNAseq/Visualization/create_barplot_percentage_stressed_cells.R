@@ -12,34 +12,60 @@ library(writexl)
 
 mouse_vcm_all_time_points_with_stress_status <- readRDS("C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_vcm_all_time_points_with_stress_status.Rds")
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots"
+mouse_vcm_all_time_points_with_stress_status@meta.data$
+
+# Plot of SHAM and ORAB of total count
+##################################################################################
+# Calculate nuclei count per group (ORAB and SHAM)
+nuclei_count_data <- mouse_vcm_all_time_points_with_stress_status@meta.data %>%
+  group_by(Timepoint, Group) %>%
+  summarize(Cell_Count = n())
+
+# Add total count per time point column
+nuclei_count_data <- nuclei_count_data %>%
+  group_by(Timepoint) %>%
+  mutate(total_count = sum(Cell_Count))
+
+# Calculate percentage nuclei of each group of total nuclei count
+nuclei_count_data <- nuclei_count_data %>%
+  mutate(percentage_of_total = (Cell_Count / total_count) * 100)
+
+print(nuclei_count_data)  
+
+nuclei_count_data$Timepoint <- factor(nuclei_count_data$Timepoint, levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
+nuclei_count_data$Group <- factor(nuclei_count_data$Group, levels = c("SHAM", "ORAB"))
+
+
+# Create plot
+nuclei_plot_condition <- ggplot(nuclei_count_data, aes(x = Timepoint, y = percentage_of_total, fill = Group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_classic() +
+  labs(title = "Distribution of Nuclei",
+       x = NULL,
+       y = "Nuclei Count of Total Count (%)",
+       fill = "Condition") +
+  scale_y_continuous(breaks = seq(0, 100, by = 10), limits = c(0, 100)) +
+  scale_fill_manual(values = c("SHAM" = "grey22", "ORAB" = "coral")) +
+  theme(axis.text.x = element_text(hjust = 0.5, size = 26, color = "black", angle = 30, vjust = 0.8, margin = margin(t = 15)),
+        axis.text.y = element_text(size = 26, colour = "black"),
+        axis.title.y = element_text(size = 26, colour = "black", margin = margin(r = 15)),
+        plot.title = element_text(size = 30, color = "black", margin = margin(b = 20, t = 10)),
+        legend.title = element_text(size = 30, colour = "black"),
+        legend.text = element_text(size = 30, color = "black"),
+        axis.line.y.right = element_blank())
+
+
+print(nuclei_plot_condition)
+
+ggsave(file.path(output_dir_plot, paste("nuclei_plot_condition.png", sep = "")), plot = nuclei_plot_condition, width = 12, height = 10, dpi = 400)
+ggsave(file.path(output_dir_plot, paste("nuclei_plot_condition.tiff", sep = "")), plot = nuclei_plot_condition, width = 12, height = 10, dpi = 400)
+
+
+
 
 
 # Plot of SHAM and plot of ORAB combined
 ##################################################################################
-# nuclei_sham <- mouse_vcm_all_time_points_with_stress_status@meta.data %>%
-#   group_by(Timepoint, Stress_Status) %>%
-#   filter(Stress_Status == "SHAM - CM") %>%
-#   summarize(Cell_Count = n()) %>%
-#   group_by(Timepoint)
-# 
-# # Rename for better layout in plot 
-# nuclei_sham <- nuclei_sham %>%
-#   mutate(Stress_Status = ifelse(Stress_Status == "SHAM - CM", "SHAM CM", Stress_Status))
-# 
-# nuclei_sham$Timepoint <- factor(nuclei_sham$Timepoint, levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
-# 
-# # Create plot for SHAM
-# 
-# 
-# nuclei_orab <- mouse_vcm_all_time_points_with_stress_status@meta.data %>%
-#   group_by(Timepoint, Stress_Status) %>%
-#   filter(Stress_Status != "SHAM - CM") %>%
-#   summarize(Cell_Count = n()) %>%
-#   group_by(Timepoint)
-# nuclei_orab$Timepoint <- factor(nuclei_orab$Timepoint, levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
-# nuclei_orab$Stress_Status <- factor(nuclei_orab$Stress_Status)
-
-
 # Prepare data
 nuclei_count <- mouse_vcm_all_time_points_with_stress_status@meta.data %>%
   group_by(Timepoint, Stress_Status) %>%
@@ -82,6 +108,7 @@ ggsave(file.path(output_dir_plot, paste("nuclei_count_plot.tiff", sep = "")), pl
 # Percentage plot
 ##################################################################################
 percentage_data <- mouse_vcm_all_time_points_with_stress_status@meta.data %>%
+  filter(Stress_Status != "SHAM - CM") %>%
   group_by(Timepoint, Stress_Status) %>%
   summarise(Cell_Count = n()) %>%
   group_by(Timepoint) %>%
@@ -90,32 +117,32 @@ percentage_data <- mouse_vcm_all_time_points_with_stress_status@meta.data %>%
 
 print(percentage_data)
 
-percentage_data <- percentage_data %>%
-  mutate(Stress_Status = ifelse(Stress_Status == "SHAM - CM", "SHAM CM", Stress_Status))
-View(percentage_data)
+# percentage_data <- percentage_data %>%
+#   mutate(Stress_Status = ifelse(Stress_Status == "SHAM - CM", "SHAM CM", Stress_Status))
+# View(percentage_data)
 
 # Set order of stress status
 percentage_data$Stress_Status <- factor(percentage_data$Stress_Status,
-                                        levels = c("SHAM CM", "Not stressed CM", "Stressed CM"))
+                                        levels = c("Not stressed CM", "Stressed CM"))
 
 percentage_data$Timepoint <- factor(percentage_data$Timepoint, levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
 
 cm_percentage_plot <- ggplot(percentage_data, aes(x = Timepoint, y = Percentage_of_total_cells, fill = Stress_Status)) +
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar(stat = "identity", position = "stack") +
   theme_classic() +
-  labs(title = "Distribution of Stress Status",
+  labs(title = "Distribution of Stress Status In ORAB",
        x = NULL,
        y = "Stress Status (%)",
        fill = "Stress Status") +
   scale_y_continuous(breaks = seq(0, 100, by = 10), labels = paste0(seq(0, 100, by = 10), "%")) +
-  scale_fill_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
-  theme(axis.text.x = element_text(hjust = 0.5, size = 20, color = "black", margin = margin(t = 15)),
+  scale_fill_manual(values = c("Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
+  theme(axis.text.x = element_text(hjust = 0.5, size = 26, color = "black", angle = 30, vjust = 0.8, margin = margin(t = 15)),
         axis.text.y = element_text(size = 26, colour = "black"),
         axis.title.y = element_text(size = 26, colour = "black", margin = margin(r = 15)),
         plot.title = element_text(size = 30, color = "black", margin = margin(b = 20, t = 10)),
         legend.title = element_text(size = 30, colour = "black"),
         legend.text = element_text(size = 30, color = "black"),
-        axis.line.y.right = element_blank()) 
+        axis.line.y.right = element_blank())
 
 print(cm_percentage_plot)
 
@@ -207,18 +234,22 @@ ggsave(file.path(output_dir_plot, paste("cm_percentage_plot_from_6h.png", sep = 
 ggsave(file.path(output_dir_plot, paste("cm_percentage_plot_from_6h.pdf", sep = "")), plot = change_from_6h_plot, width = 12, height = 10, dpi = 400)
 
 
-change_from_6h_plot <- change_from_6h_plot +
+
+
+# Combine two plots
+############################################################################################################
+nuclei_count_plot <- nuclei_count_plot +
   theme(plot.margin = unit(c(1,1,1,1), "cm"))  # top, right, bottom, left margin
 
 cm_percentage_plot <- cm_percentage_plot +
   theme(plot.margin = unit(c(1,1,1,1), "cm"))
 
         
-total_cm_distribution_plot <- (change_from_6h_plot | cm_percentage_plot)
+total_cm_distribution_plot <- (nuclei_count_plot | cm_percentage_plot)
 total_cm_distribution_plot
 
-ggsave(file.path(output_dir_plot, paste("total_cm_distribution_plot.png", sep = "")), plot = total_cm_distribution_plot, width = 24, height = 10, dpi = 400)
-ggsave(file.path(output_dir_plot, paste("total_cm_distribution_plot.pdf", sep = "")), plot = total_cm_distribution_plot, width = 24, height = 10, dpi = 400)
+ggsave(file.path(output_dir_plot, paste("total_nuclei_distribution_plot.png", sep = "")), plot = total_cm_distribution_plot, width = 24, height = 10, dpi = 400)
+ggsave(file.path(output_dir_plot, paste("total_nuclei_distribution_plot.pdf", sep = "")), plot = total_cm_distribution_plot, width = 24, height = 10, dpi = 400)
 
 
 # write_xlsx(percentage_data_test, path = "C:/Users/siljeew/Master_project/snRNAseq/Data/cm_count.xlsx")

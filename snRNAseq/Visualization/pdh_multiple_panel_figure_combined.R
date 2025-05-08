@@ -47,8 +47,8 @@ total_pdh_plot <- (go_plot_pdh | gene_plot_pdh) /
 print(total_pdh_plot)
 
 # Save the combined plot—adjust width and height for space between plots
-ggsave(file.path(output_dir_plot, "total_pdh_plot.pdf"), plot = total_pdh_plot, width = 24, height = 16)
-openPDF(file.path(output_dir_plot, "total_pdh_plot.pdf"))
+ggsave(file.path(output_dir_plot, "total_pdh_plot_new.pdf"), plot = total_pdh_plot, width = 24, height = 16)
+openPDF(file.path(output_dir_plot, "total_pdh_plot_new.pdf"))
 
-ggsave(file.path(output_dir_plot, "total_pdh_plot.png"), plot = total_pdh_plot, width = 24, height = 16)
+ggsave(file.path(output_dir_plot, "total_pdh_plot_new.png"), plot = total_pdh_plot, width = 24, height = 16)
 

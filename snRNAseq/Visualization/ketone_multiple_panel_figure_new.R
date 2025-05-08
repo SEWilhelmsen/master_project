@@ -2,6 +2,8 @@
 # Silje Wilhelmsen
 
 # Necessary preparation:
+# Combined data is the output of C:/Users/siljeew/Master_project/snRNAseq/Analysis/combine_all_markers_new.R
+
 # file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/run_create_barplot_go_process_by_stress.R") #This is not finished
 file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/run_create_gene_plot_by_stress_.R")
 
@@ -35,7 +37,39 @@ stressed_not_stressed <- go_process_summary_bdh1 %>%
   filter(stressed_not_stressed != "ns") %>%
   mutate(y_position = percentage_to_sham + 10) # Adjust y_position as needed
 
-single_gene_plot_bdh1 <- ggplot(go_process_summary_bdh1, aes(x = Timepoint, y = percentage_to_sham, color = Stress_Status, group = Stress_Status)) +
+# Prepare data for plot
+# Create data frame with mean expression and percentage to SHAM
+gene_of_interest <- "BDH1"
+
+data_for_plot <- combined_data %>%
+  filter(gene == gene_of_interest) %>%
+  select(gene, group, Timepoint, avgExpr)
+View(data_for_plot)
+
+data_for_plot <- data_for_plot %>%
+  group_by(Timepoint) %>%
+  mutate(sham_avgExpr = avgExpr[group == "SHAM - CM"],
+         percentage_to_sham = (avgExpr / sham_avgExpr) * 100) %>%
+  ungroup()
+View(data_for_plot)
+
+data_for_plot <- data_for_plot %>%
+  rename(Stress_Status = group)
+
+data_for_plot <- data_for_plot %>%
+  mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
+
+# Setting the Timepoint as a factor to ensure order in the plot
+data_for_plot$Timepoint <- factor(data_for_plot$Timepoint, 
+                                  levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
+
+# Order the Stress_Status levels
+data_for_plot$Stress_Status <- factor(data_for_plot$Stress_Status,
+                                      levels = c("SHAM CM", "Not stressed CM", "Stressed CM"))
+
+
+# Create plot
+single_gene_plot_bdh1 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage_to_sham, color = Stress_Status, group = Stress_Status)) +
   geom_line(linewidth = 1.5) +  
   geom_point(size = 3) +  
   labs(x = NULL, 
@@ -72,11 +106,11 @@ go_process_summary_oxct1 <- read_excel("Data/Stress_Status/go_process_summary_t_
 
 # Setting the Timepoint as a factor to ensure order in the plot
 go_process_summary_oxct1$Timepoint <- factor(go_process_summary_oxct1$Timepoint, 
-                                            levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
+                                             levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
 
 # Order the Stress_Status levels
 go_process_summary_oxct1$Stress_Status <- factor(go_process_summary_oxct1$Stress_Status,
-                                                levels = c("SHAM CM", "Not stressed CM", "Stressed CM"))
+                                                 levels = c("SHAM CM", "Not stressed CM", "Stressed CM"))
 
 
 # Modify specific timepoints if necessary
@@ -92,8 +126,37 @@ stressed_not_stressed <- go_process_summary_oxct1 %>%
   filter(stressed_not_stressed != "ns") %>%
   mutate(y_position = percentage_to_sham + 3)
 
+# Prepare data for plot
+# Create data frame with mean expression and percentage to SHAM
+gene_of_interest <- "OXCT1"
 
-single_gene_plot_oxct1 <- ggplot(go_process_summary_oxct1, aes(x = Timepoint, y = percentage_to_sham, color = Stress_Status, group = Stress_Status)) +
+data_for_plot <- combined_data %>%
+  filter(gene == gene_of_interest) %>%
+  select(gene, group, Timepoint, avgExpr)
+
+data_for_plot <- data_for_plot %>%
+  group_by(Timepoint) %>%
+  mutate(sham_avgExpr = avgExpr[group == "SHAM - CM"],
+         percentage_to_sham = (avgExpr / sham_avgExpr) * 100) %>%
+  ungroup()
+
+data_for_plot <- data_for_plot %>%
+  rename(Stress_Status = group)
+
+data_for_plot <- data_for_plot %>%
+  mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
+
+# Setting the Timepoint as a factor to ensure order in the plot
+data_for_plot$Timepoint <- factor(data_for_plot$Timepoint, 
+                                  levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
+
+# Order the Stress_Status levels
+data_for_plot$Stress_Status <- factor(data_for_plot$Stress_Status,
+                                      levels = c("SHAM CM", "Not stressed CM", "Stressed CM"))
+
+
+# Create plo
+single_gene_plot_oxct1 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage_to_sham, color = Stress_Status, group = Stress_Status)) +
   geom_line(linewidth = 1.5) +  
   geom_point(size = 3) +  
   labs(x = NULL, 

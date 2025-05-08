@@ -47,9 +47,8 @@ total_fatty_acid_plot <- (go_plot_fatty_acid_uptake | go_plot_b_oxidation) /
 
 
 # Save the combined plot—adjust width and height for space between plots
-ggsave(file.path(output_dir_plot, "total_fatty_acid_plot.png"), plot = total_fatty_acid_plot, width = 24, height = 28)
+ggsave(file.path(output_dir_plot, "total_fatty_acid_plot_new.png"), plot = total_fatty_acid_plot, width = 24, height = 28)
 
-ggsave(file.path(output_dir_plot, "total_fatty_acid_plot.pdf"), plot = total_fatty_acid_plot, width = 24, height = 28)
-openPDF(file.path(output_dir_plot, "total_fatty_acid_plot.pdf"))
+ggsave(file.path(output_dir_plot, "total_fatty_acid_plot_new.pdf"), plot = total_fatty_acid_plot, width = 24, height = 28)
+openPDF(file.path(output_dir_plot, "total_fatty_acid_plot_new.pdf"))
 
-#ggsave(dpi ) 400-600   

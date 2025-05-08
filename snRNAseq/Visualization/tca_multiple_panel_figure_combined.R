@@ -39,14 +39,11 @@ total_tca_plot <- (go_plot_tca | gene_plot_tca) /
   (single_gene_plot_idh1 | single_gene_plot_idh2) /
   (single_gene_plot_idh3b + plot_spacer())
 
-ggsave(file.path(output_dir_plot, "total_tca_plot_test.png"), plot = total_tca_plot, width = 24, height = 24)
-
-
-# Print the combined plot
-print(total_tca_plot)
 
 # Save the combined plot—adjust width and height for space between plots
-ggsave(file.path(output_dir_plot, "total_tca_plot.pdf"), plot = total_tca_plot, width = 24, height = 24)
+ggsave(file.path(output_dir_plot, "total_tca_plot_new.pdf"), plot = total_tca_plot, width = 24, height = 24)
 #openPDF(file.path(output_dir_plot, "total_tca_plot.pdf"))
 
-ggsave(file.path(output_dir_plot, "total_tca_plot.png"), plot = total_tca_plot, width = 24, height = 24)
+ggsave(file.path(output_dir_plot, "total_tca_plot_new.png"), plot = total_tca_plot, width = 24, height = 24)
+
+ggsave(file.path(output_dir_plot, "total_tca_plot_new.tiff"), plot = total_tca_plot, width = 24, height = 24)
