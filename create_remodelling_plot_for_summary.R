@@ -117,7 +117,7 @@ nuclei_count <- nuclei_count %>%
 
 nuclei_count <- nuclei_count %>%
   mutate(percentage_to_sham = (Cell_Count / cell_count_sham) * 100)
-print(nuclei_count)
+# print(nuclei_count)
 
 # Percentage stressed of all ORAB CMs
 orab_nuclei <- nuclei_count %>%
@@ -133,15 +133,23 @@ orab_nuclei <- orab_nuclei %>%
   mutate(percentage_of_total = (Cell_Count/total_orab) * 100) 
 
 nuclei_data <- orab_nuclei %>%
+  filter(Stress_Status == "Stressed CM") %>%
   select(Timepoint, Stress_Status, percentage_of_total) %>%
   rename(Variable = Stress_Status,
          Percentage_to_sham = percentage_of_total)
+  
+
+nuclei_data <- nuclei_data %>%
+  mutate(Variable = ifelse(Variable == "Stressed CM", "% of CMs that are stressed", Variable))
+print(nuclei_data)
 
 data_remodelling <- data_remodelling %>%
-  filter(Percentage_to_sham != "NA") %>%
-  dplyr::select(-percentage_to_sham)
+  filter(Variable != "NA")
 
-print(nuclei_data)
+# data_remodelling <- data_remodelling %>%
+#   filter(Variable != "Stressed CM",
+#          Variable != "Not stressed CM",
+#          Variable != "% CM of that are stressed")
 
 # Merge into data frame
 data_remodelling <- bind_rows(data_remodelling, nuclei_data)
@@ -149,7 +157,7 @@ print(data_remodelling)
 
 # Set as factor for correct order
 data_remodelling$Timepoint <- factor(data_remodelling$Timepoint, levels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks"))
-data_remodelling$Variable <- factor(data_remodelling$Variable)
+data_remodelling$Variable <- factor(data_remodelling$Variable, levels = c("Fibrosis", "LVW/BW", "% of CMs that are stressed"))
 data_remodelling$Percentage_to_sham <- as.numeric(data_remodelling$Percentage_to_sham)
 print(data_remodelling)
 
@@ -173,10 +181,6 @@ print(data_remodelling)
 # print(plot)
 
 
-
-
-
-
 # # Create plot
 # label_data <- data_remodelling %>%
 #   filter(Timepoint == "3 Weeks") %>%
@@ -192,7 +196,12 @@ remodelling_plot <- ggplot(data_remodelling, aes(x = Timepoint, y = Percentage_t
   labs(title = "Cardiac Remodelling and Morphology", 
        x = "Time", 
        y = "Values compared to SHAM (%)") +
-  scale_color_manual(values = c("Fibrosis" = "darkcyan", "LVW/BW" = "brown", "Stressed CM" = "olivedrab4", "Not stressed CM" = "goldenrod")) +
+  scale_color_manual(
+    values = c("Fibrosis" = "darkcyan", 
+               "LVW/BW" = "brown", 
+               "% of CMs that are stressed" = "olivedrab4"), 
+    labels = c("Fibrosis", "LVW/BW", "% of CMs \nthat are stressed")  # \n gives a lineshift
+  ) +
   scale_y_continuous(breaks = seq(0, 240, by = 20), limits = c(0, 240))  +
   theme_classic() +
   theme(axis.text.x = element_text(hjust = 0.5, size = 26, color = "black", margin = margin(t = 15)),

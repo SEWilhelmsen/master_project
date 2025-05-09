@@ -18,6 +18,11 @@ library(stringr)
 signal_diff_data <- read_excel("C:/Users/siljeew/Master_project/snRNAseq/Data/tukey_results_progeny_by_condition.xlsx")
 View(signal_diff_data)
 
+values <- signal_diff_data %>% 
+  filter(Pathway == "TNFa")
+
+print(values)  
+  
 # Define activity of SHAM as 1 for relative comparison
 activity_sham_value <- 1
 

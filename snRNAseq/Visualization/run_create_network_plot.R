@@ -3,13 +3,13 @@
 
 
 # Source necessary
-source("C:/Users/siljeew/snRNAseq/Visualization/load_libraries_run_create_network_plot.R")
-source("C:/Users/siljeew/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
-source("C:/Users/siljeew/snRNAseq/Visualization/create_network_plot_functions.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/load_libraries_run_create_network_plot.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
+source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_network_plot_functions.R")
 
 # Set parameters
 #############################################################################
-output_dir_network <- "C:/Users/siljeew/snRNAseq/Plots/Network"
+output_dir_network <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Network"
 # Ensure the directory exists
 if (!dir.exists(output_dir_network)) {
   dir.create(output_dir_network, recursive = TRUE)
@@ -21,7 +21,7 @@ go_processes_of_interest <- c('glycolysis')
 # Define the specific processes you want to include as nodes
 specific_process_names <- c("glycolysis", "pdh", "etc", "fao", "tca", "ketone_catabolism", "protein_transmembrane_transport", "chylomicron_clearance", "atp_synthesis", "uncoupling_proteins", "ketone_metabolic_process")
 
-file_path <- "C:/Users/siljeew/snRNAseq/tmp/mouse_6h_vcm.Rds"
+file_path <- "C:/Users/siljeew/Master_project/snRNAseq/tmp/mouse_6h_vcm_with_stress_status.Rds"
 
 threshold <- 0.7
 
