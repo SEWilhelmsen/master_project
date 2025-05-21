@@ -193,7 +193,7 @@ remodelling_plot <- ggplot(data_remodelling, aes(x = Timepoint, y = Percentage_t
   geom_hline(yintercept = 100, linetype = "dashed", color = "black") +  # Add horizontal line at y = 100
   # geom_text(data = label_data, aes(x = Timepoint, y = Percentage_to_sham, label = Variable), 
   #           color = "black", size = 6, vjust = -0.5, hjust = 0.5) +  # Position the text at the appropriate y position
-  labs(title = "Cardiac Remodelling and Morphology", 
+  labs(title = "Cardiac remodelling and morphology", 
        x = "Time", 
        y = "Values compared to SHAM (%)") +
   scale_color_manual(
@@ -202,17 +202,17 @@ remodelling_plot <- ggplot(data_remodelling, aes(x = Timepoint, y = Percentage_t
                "% of CMs that are stressed" = "olivedrab4"), 
     labels = c("Fibrosis", "LVW/BW", "% of CMs \nthat are stressed")  # \n gives a lineshift
   ) +
-  scale_y_continuous(breaks = seq(0, 240, by = 20), limits = c(0, 240))  +
+  scale_y_continuous(breaks = seq(0, 240, by = 30), limits = c(0, 240))  +
   theme_classic() +
   theme(axis.text.x = element_text(hjust = 0.5, size = 26, color = "black", margin = margin(t = 15)),
         axis.text.y = element_text(size = 26, colour = "black"), 
         axis.title.y = element_text(size = 26, margin = margin(r = 15)),
-        axis.title.x = element_text(hjust = 1, vjust = 1, size = 26, margin = margin(t = 15)),
+        axis.title.x = element_blank(),
         plot.title = element_text(size = 26, margin = margin(b = 20)),
         legend.title = element_text(size = 26, colour = "black"),
         legend.text = element_text(size = 26, colour = "black"),
         #legend.position = "none",
-        plot.margin = margin(t = 10, r = 30, b = 10, l = 10))
+        plot.margin = margin(t = 20, r = 30, b = 10, l = 10))
 
 # Display the plot
 print(remodelling_plot)
