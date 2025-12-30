@@ -1,7 +1,9 @@
 # Fatty Acid plots
 # Silje Wilhelmsen
 
-# Combined data is the output of C:/Users/siljeew/Master_project/snRNAseq/Analysis/combine_all_markers_new.R
+# Combined data is the output of file.edit("C:/Users/siljeew/Master_project/snRNAseq/Analysis/combine_all_markers_new.R")
+
+combined_data <- read_excel("C:/Users/siljeew/Master_project/snRNAseq/Data/markers_data_by_stress.xlsx")
 
 
 # Create plot for CD36
@@ -42,7 +44,7 @@ gene_of_interest <- "CD36"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
+  dplyr::select(gene, group, Timepoint, avgExpr)
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
@@ -50,10 +52,11 @@ data_for_plot <- data_for_plot %>%
   mutate(sham_avgExpr = avgExpr[group == "SHAM - CM"],
          percentage_to_sham = (avgExpr / sham_avgExpr) * 100) %>%
   ungroup()
-View(data_for_plot)
+# View(data_for_plot)
+
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -73,7 +76,7 @@ single_gene_plot_cd36 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("CD36 Expression Compared to SHAM"),
+       title = bquote(italic(Cd36) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -130,18 +133,18 @@ gene_of_interest <- "CPT1A"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
-View(data_for_plot)
+  dplyr::select(gene, group, Timepoint, avgExpr)
+# View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
   group_by(Timepoint) %>%
   mutate(sham_avgExpr = avgExpr[group == "SHAM - CM"],
          percentage_to_sham = (avgExpr / sham_avgExpr) * 100) %>%
   ungroup()
-View(data_for_plot)
+# View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -160,11 +163,10 @@ single_gene_plot_cpt1a <- ggplot(data_for_plot, aes(x = Timepoint, y = percentag
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("CPT1A Expression Compared to SHAM"),
+       title = bquote(italic(Cpt1a) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
-  # scale_x_discrete(labels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks")) +
   scale_y_continuous(breaks = seq(0, 160, by = 20), limits = c(20, 160)) +
   theme(axis.text.x = element_text(hjust = 0.5, size = 18, color = "black", margin = margin(t = 15)), 
         axis.text.y = element_text(size = 20, colour = "black"), 
@@ -217,7 +219,7 @@ gene_of_interest <- "CPT1B"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
+  dplyr::select(gene, group, Timepoint, avgExpr)
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
@@ -228,7 +230,7 @@ data_for_plot <- data_for_plot %>%
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -247,7 +249,7 @@ single_gene_plot_cpt1b <- ggplot(data_for_plot, aes(x = Timepoint, y = percentag
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("CPT1B Expression Compared to SHAM"),
+       title = bquote(italic(Cpt1b) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -305,7 +307,7 @@ gene_of_interest <- "CPT2"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
+  dplyr::select(gene, group, Timepoint, avgExpr)
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
@@ -316,7 +318,7 @@ data_for_plot <- data_for_plot %>%
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -335,7 +337,7 @@ single_gene_plot_cpt2 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("CPT2 Expression Compared to SHAM"),
+       title = bquote(italic(Cpt2) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +

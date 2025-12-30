@@ -27,8 +27,11 @@ create_go_genes_plot <- function(data_avg_logfc, go_process_of_interest_genes) {
     labs(x = NULL,
          y = "Average logFC expression",
          color = "Genes",
-         title = "Tricarboxylic Acid Cycle Genes") +
+         title = "Glycolysis genes") +
     scale_color_brewer(palette = "Set1") +
+    scale_color_manual(
+        values = c("GCK" = "#E41A1C", "HK1" = "#377EB8", "HK2" = "#4DAF4A", "PFKM" = "#984EA3"),
+        labels = expression(italic("Gck"), italic("Hk1"), italic("Hk2"), italic("Pfkm"))) + # Labels in italic
     scale_y_continuous(limits = c(-1, 1)) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
     theme_classic() +
@@ -45,18 +48,57 @@ create_go_genes_plot <- function(data_avg_logfc, go_process_of_interest_genes) {
   print(go_genes_plot)
 }
 
-
-# gene_plot_tca <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
-# print(gene_plot_tca)
-
+# Colors:
+# scale_color_manual(
+#   values = c("CD36" = "#E41A1C"), 
+#   labels = expression(italic("Cd36"))) + # Set label to italic
 # gene_plot_fatty_acid_uptake <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
 # print(gene_plot_fatty_acid_uptake)
 
+
+# Colors:
+# scale_color_manual(
+# values = c("CPT1A" = "#E41A1C", "CPT1B" = "#377EB8", "CPT2" = "#4DAF4A"), 
+# labels = expression(italic("Cpt1a"), italic("Cpt1b"), italic("Cpt2"))) +  # Labels in italic
 # gene_plot_b_oxidation <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
 # print(gene_plot_b_oxidation)
 
+# scale_color_manual(
+#   values = c("SLC2A4" = "#E41A1C"), 
+#   labels = expression(italic("Slc2a4"))) +  # Labels in italic
+# gene_plot_glucose_uptake <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
+# print(gene_plot_glucose_uptake)
+
+
+# scale_color_manual(
+#   values = c("GCK" = "#E41A1C", "HK1" = "#377EB8", "HK2" = "#4DAF4A", "PFKM" = "#984EA3"), 
+#   labels = expression(italic("Gck"), italic("Hk1"), italic("Hk2"), italic("Pfkm"))) + # Labels in italic
+gene_plot_glycolysis <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
+print(gene_plot_glycolysis)
+
+# scale_color_manual(
+#   values = c("DLAT" = "#E41A1C", "DLD" = "#377EB8", "PDHA1" = "#4DAF4A", "PDHX" = "#984EA3"), 
+#   labels = expression(italic("Dlat"), italic("Dld"), italic("Pdha1"), italic("Pdhx"))) + # Labels in italic
+# gene_plot_pdh <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
+# print(gene_plot_pdh)
+  
+
+# scale_color_manual(
+#   values = c("BDH1" = "#E41A1C"), 
+#   labels = expression(italic("Bdh1"))) + # Labels in italic
 # gene_plot_bdh1 <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
 # print(gene_plot_bdh1)
 
+# scale_color_manual(
+#   values = c("OXCT1" = "#E41A1C"), 
+#   labels = expression(italic("Oxct1")) + # Labels in italic
 # gene_plot_oxct1 <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
 # print(gene_plot_oxct1)
+
+
+# scale_color_manual(
+#   values = c("IDH1" = "#E41A1C", "IDH2" = "#377EB8", "IDH3B" = "#4DAF4A"), 
+#   labels = expression(italic("Idh1"), italic("Idh2"), italic("Idh3b"))) + # Labels in italic
+# gene_plot_tca <- create_go_genes_plot(data_avg_logfc, go_process_of_interest_genes)
+# print(gene_plot_tca)
+

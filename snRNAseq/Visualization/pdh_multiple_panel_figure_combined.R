@@ -51,4 +51,6 @@ ggsave(file.path(output_dir_plot, "total_pdh_plot_new.pdf"), plot = total_pdh_pl
 openPDF(file.path(output_dir_plot, "total_pdh_plot_new.pdf"))
 
 ggsave(file.path(output_dir_plot, "total_pdh_plot_new.png"), plot = total_pdh_plot, width = 24, height = 16)
+ggsave(file.path(output_dir_plot, "total_pdh_plot_new.tiff"), plot = total_pdh_plot, width = 24, height = 16)
+
 

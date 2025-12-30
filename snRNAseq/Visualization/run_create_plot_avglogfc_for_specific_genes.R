@@ -11,9 +11,21 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_s
 # source("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_barplot_go_process.R")
 # source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/process_seurat_data.R")
 
+# fatty_acid_transport
+# b_oxidation
+
+# glucose_transmembrane_transport
+# glycolysis
+
+# pdh
+# hydroxybutyrate_dehydrogenase_activity
+# ketone_catabolism
+# tca
+
+
 # Set parameters and prepare data
 ############################################################################
-go_process_of_interest <- 'tca'  # Change process 
+go_process_of_interest <- 'glycolysis'  # Change process 
 
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Gene_process"
 file_path_to_data_avg_logfc <- "C:/Users/siljeew/Master_project/snRNAseq/Data/mouse_vcm_all_genes_avg_logFC.csv"

@@ -19,14 +19,14 @@ file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/pdh_multiple_p
 ##############################################################################################
 # Set margins
 go_plot_glucose_uptake <- go_plot_glucose_uptake +
-  theme(plot.margin = unit(c(1,1,2,1), "cm"))  # top, right, bottom, left margin
+  theme(plot.margin = unit(c(2,1,2,1), "cm"))  # top, right, bottom, left margin
 go_plot_glycolysis <- go_plot_glycolysis +
-  theme(plot.margin = unit(c(1,1,2,5), "cm"))  # top, right, bottom, left margin
+  theme(plot.margin = unit(c(2,1,2,5), "cm"))  # top, right, bottom, left margin
 
 gene_plot_glucose_uptake <- gene_plot_glucose_uptake +
   theme(plot.margin = unit(c(1,1,2,1), "cm"))  # top, right, bottom, left margin
 gene_plot_glycolysis <- gene_plot_glycolysis +
-  theme(plot.margin = unit(c(1,1,2,4), "cm"))  # top, right, bottom, left margin
+  theme(plot.margin = unit(c(1,1,2,5), "cm"))  # top, right, bottom, left margin
 
 single_gene_plot_slc2a4 <- single_gene_plot_slc2a4 +
   theme(plot.margin = unit(c(1,1,2,1), "cm"))  # top, right, bottom, left margin
@@ -51,11 +51,12 @@ total_glucose_plot <- (go_plot_glucose_uptake | go_plot_glycolysis) /
   (single_gene_plot_pfkm | plot_spacer()) 
 
 # Print the combined plot
-print(total_glucose_plot)
+# print(total_glucose_plot)
 
 
 # Save the combined plot—adjust width and height for space between plots
 ggsave(file.path(output_dir_plot, "total_glucose_plot_new.png"), plot = total_glucose_plot, width = 24, height = 28)
+ggsave(file.path(output_dir_plot, "total_glucose_plot_new.tiff"), plot = total_glucose_plot, width = 24, height = 28)
 
 ggsave(file.path(output_dir_plot, "total_glucose_plot_new.pdf"), plot = total_glucose_plot, width = 24, height = 28)
 openPDF(file.path(output_dir_plot, "total_glucose_plot_new.pdf"))

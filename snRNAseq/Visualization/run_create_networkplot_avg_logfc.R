@@ -182,7 +182,7 @@ print(head(V(graph)$label))
 
 # Visual styling for nodes
 V(graph)$color <- ifelse(V(graph)$type == "process", "lightblue", "lightgreen")  #Colors of process and gene
-V(graph)$size <- ifelse(V(graph)$type == "process", 8, 5)
+V(graph)$size <- ifelse(V(graph)$type == "process", 10, 5)
 
 # Use layout for graph
 layout <- layout_with_fr(graph)
@@ -241,15 +241,15 @@ print(networkplot)
 
 
 
-# Save plot 
-################################################################################
-file_name <- paste0(time_point_of_interest, "_network.png")
-file_path <- file.path(output_dir_network, file_name)
-
-# Save the plot to a file
-png(file_path, width = 1000, height = 1000)
-print(networkplot)
-dev.off()
-
-# Confirm the file path if needed
-print(paste("Plot saved at:", file_path))
+# # Save plot 
+# ################################################################################
+# file_name <- paste0(time_point_of_interest, "_network.png")
+# file_path <- file.path(output_dir_network, file_name)
+# 
+# # Save the plot to a file
+# png(file_path, width = 1000, height = 1000)
+# print(networkplot)
+# dev.off()
+# 
+# # Confirm the file path if needed
+# print(paste("Plot saved at:", file_path))

@@ -3,6 +3,7 @@
 
 # Combined data is the output of C:/Users/siljeew/Master_project/snRNAseq/Analysis/combine_all_markers_new.R
 
+combined_data <- read_excel("C:/Users/siljeew/Master_project/snRNAseq/Data/markers_data_by_stress.xlsx")
 
 
 # Create plot for slc2a4
@@ -39,7 +40,7 @@ gene_of_interest <- "SLC2A4"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
+  dplyr::select(gene, group, Timepoint, avgExpr)
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
@@ -50,7 +51,7 @@ data_for_plot <- data_for_plot %>%
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -70,7 +71,7 @@ single_gene_plot_slc2a4 <- ggplot(data_for_plot, aes(x = Timepoint, y = percenta
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("SLC2A4 Expression Compared to SHAM"),
+       title = bquote(italic(Slc2a4) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -132,7 +133,7 @@ gene_of_interest <- "GCK"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
+  dplyr::select(gene, group, Timepoint, avgExpr)
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
@@ -143,7 +144,7 @@ data_for_plot <- data_for_plot %>%
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -163,7 +164,7 @@ single_gene_plot_gck <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage_
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("GCK Expression Compared to SHAM"),
+       title = bquote(italic(Gck) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -222,7 +223,7 @@ gene_of_interest <- "HK1"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
+  dplyr::select(gene, group, Timepoint, avgExpr)
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
@@ -233,7 +234,7 @@ data_for_plot <- data_for_plot %>%
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -253,7 +254,7 @@ single_gene_plot_hk1 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage_
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("HK1 Expression Compared to SHAM"),
+       title = bquote(italic(Hk1) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -311,7 +312,7 @@ gene_of_interest <- "HK2"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
+  dplyr::select(gene, group, Timepoint, avgExpr)
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
@@ -322,7 +323,7 @@ data_for_plot <- data_for_plot %>%
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -342,7 +343,7 @@ single_gene_plot_hk2 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage_
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("HK2 Expression Compared to SHAM"),
+       title = bquote(italic(Hk2) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -398,8 +399,8 @@ gene_of_interest <- "PFKM"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
-View(data_for_plot)
+  dplyr::select(gene, group, Timepoint, avgExpr)
+# View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
   group_by(Timepoint) %>%
@@ -409,7 +410,7 @@ data_for_plot <- data_for_plot %>%
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -429,7 +430,7 @@ single_gene_plot_pfkm <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("PFKM Expression Compared to SHAM"),
+       title = bquote(italic(Pfkm) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +

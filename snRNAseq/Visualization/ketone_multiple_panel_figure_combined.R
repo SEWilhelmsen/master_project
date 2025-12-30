@@ -27,12 +27,12 @@ go_plot_ketone_catabolism <- go_plot_ketone_catabolism +
 gene_plot_bdh1 <- gene_plot_bdh1 +
   theme(plot.margin = unit(c(1,1,2,1), "cm"))  # top, right, bottom, left margin
 gene_plot_oxct1 <- gene_plot_oxct1 +
-  theme(plot.margin = unit(c(1,1,2,5), "cm"))  # top, right, bottom, left margin
+  theme(plot.margin = unit(c(1,1,2,6), "cm"))  # top, right, bottom, left margin
 
 single_gene_plot_bdh1 <- single_gene_plot_bdh1 +
   theme(plot.margin = unit(c(1,1,2,1), "cm"))  # top, right, bottom, left margin
 single_gene_plot_oxct1 <- single_gene_plot_oxct1 +
-  theme(plot.margin = unit(c(1,1,2,1), "cm"))  # top, right, bottom, left margin
+  theme(plot.margin = unit(c(1,1,2,2), "cm"))  # top, right, bottom, left margin
 
 
 
@@ -42,10 +42,12 @@ total_ketone_plot <- (go_plot_hydroxybutyrate_dehydrogenase | go_plot_ketone_cat
   (single_gene_plot_bdh1 | single_gene_plot_oxct1)
 
 # Print the combined plot
-print(total_ketone_plot)
+# print(total_ketone_plot)
 
 # Save the combined plot—adjust width and height for space between plots
 ggsave(file.path(output_dir_plot, "total_ketone_plot_new.pdf"), plot = total_ketone_plot, width = 24, height = 22)
 openPDF(file.path(output_dir_plot, "total_ketone_plot_new.pdf"))
 
 ggsave(file.path(output_dir_plot, "total_ketone_plot_new.png"), plot = total_ketone_plot, width = 24, height = 22)
+ggsave(file.path(output_dir_plot, "total_ketone_plot_new.tiff"), plot = total_ketone_plot, width = 24, height = 22)
+

@@ -6,6 +6,10 @@
 # For preparing t-test labels
 # file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/prepare_t_test_significance_label_gene_by_stress.R")
 
+# New data file: 
+combined_data <- read_excel("C:/Users/siljeew/Master_project/snRNAseq/Data/markers_data_by_stress.xlsx")
+
+
 # Create plot for PDHA1
 #################################################################################################
 # Load data
@@ -39,18 +43,18 @@ gene_of_interest <- "PDHA1"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
-View(data_for_plot)
+  dplyr::select(gene, group, Timepoint, avgExpr)
+# View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
   group_by(Timepoint) %>%
   mutate(sham_avgExpr = avgExpr[group == "SHAM - CM"],
          percentage_to_sham = (avgExpr / sham_avgExpr) * 100) %>%
   ungroup()
-View(data_for_plot)
+# View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -70,7 +74,7 @@ single_gene_plot_pdha1 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentag
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("PDHA1 Expression Compared to SHAM"),
+       title = bquote(italic(Pdha1) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -184,7 +188,7 @@ gene_of_interest <- "DLD"
 
 data_for_plot <- combined_data %>%
   filter(gene == gene_of_interest) %>%
-  select(gene, group, Timepoint, avgExpr)
+  dplyr::select(gene, group, Timepoint, avgExpr)
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
@@ -195,7 +199,7 @@ data_for_plot <- data_for_plot %>%
 View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
-  rename(Stress_Status = group)
+  dplyr::rename(Stress_Status = group)
 
 data_for_plot <- data_for_plot %>%
   mutate(Stress_Status = str_replace(Stress_Status, "SHAM - CM", "SHAM CM"))
@@ -215,12 +219,12 @@ single_gene_plot_dld <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage_
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("DLD Expression Compared to SHAM"),
+       title = bquote(italic(Dld) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
   scale_x_discrete(labels = c("6 Hours", "12 Hours", "1 Day", "3 Days", "1 Week", "3 Weeks")) +
-  scale_y_continuous(breaks = seq(0, 160, by = 20), limits = c(60, 160)) +
+  scale_y_continuous(breaks = seq(0, 160, by = 10), limits = c(60, 160)) +
   theme(axis.text.x = element_text(hjust = 0.5, size = 18, color = "black", margin = margin(t = 15)), 
         axis.text.y = element_text(size = 20, colour = "black"), 
         axis.title.x = element_blank(),

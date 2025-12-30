@@ -7,6 +7,8 @@
 # file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/run_create_barplot_go_process_by_stress.R") #This is not finished
 file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/run_create_gene_plot_by_stress_.R")
 
+# New data file: 
+combined_data <- read_excel("C:/Users/siljeew/Master_project/snRNAseq/Data/markers_data_by_stress.xlsx")
 
 
 # Create plot for IDH1
@@ -50,7 +52,7 @@ data_for_plot <- data_for_plot %>%
   mutate(sham_avgExpr = avgExpr[group == "SHAM - CM"],
          percentage_to_sham = (avgExpr / sham_avgExpr) * 100) %>%
   ungroup()
-View(data_for_plot)
+# View(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
   dplyr::rename(Stress_Status = group)
@@ -74,7 +76,7 @@ single_gene_plot_idh1 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("IDH1 Expression Compared to SHAM"),
+       title = bquote(italic(Idh1) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -138,7 +140,7 @@ data_for_plot <- data_for_plot %>%
   mutate(sham_avgExpr = avgExpr[group == "SHAM - CM"],
          percentage_to_sham = (avgExpr / sham_avgExpr) * 100) %>%
   ungroup()
-head(data_for_plot)
+# head(data_for_plot)
 
 data_for_plot <- data_for_plot %>%
   dplyr::rename(Stress_Status = group)
@@ -161,7 +163,7 @@ single_gene_plot_idh2 <- ggplot(data_for_plot, aes(x = Timepoint, y = percentage
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("IDH2 Expression Compared to SHAM"),
+       title = bquote(italic(Idh2) ~"expression compared to SHAM"),
        color = "Stress status") +  
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +
@@ -252,7 +254,7 @@ single_gene_plot_idh3b <- ggplot(data_for_plot, aes(x = Timepoint, y = percentag
   geom_point(size = 3) +  
   labs(x = NULL, 
        y = "Expression (%)", 
-       title = paste("IDH3B Expression Compared to SHAM"),
+       title = bquote(italic(Idh3b) ~"expression compared to SHAM"),
        color = "Stress status") +  # Grouping title
   theme_classic() +
   scale_color_manual(values = c("SHAM CM" = "grey22", "Not stressed CM" = "darkorange", "Stressed CM" = "coral3")) +

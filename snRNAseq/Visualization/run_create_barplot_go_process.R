@@ -16,11 +16,19 @@ source("C:/Users/siljeew/Master_project/snRNAseq/Analysis/find_specific_genes.R"
 file.edit("C:/Users/siljeew/Master_project/snRNAseq/Analysis/define_go_terms_and_find_genes.R")
 file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_plot_for_specific_genes_for_combined_plot.R")
 
+# fatty_acid_transport
+# b_oxidation
+# glucose_transmembrane_transport
+# glycolysis
 
+# pdh
+# hydroxybutyrate_dehydrogenase_activity
+# ketone_catabolism
+# tca
 
 ### Set parameters 
 #########################################################################
-go_process_of_interest <- 'tca' # Change process of interest 
+go_process_of_interest <- 'glycolysis' # Change process of interest 
 output_dir_plot <- "C:/Users/siljeew/Master_project/snRNAseq/Plots/Gene_process"
 
 # Ensure output plot directory exists
@@ -91,7 +99,7 @@ t_test_go_process <- t_test_go_process %>%
   mutate(significance_label = ifelse(`p_adj` < 0.001, "***", 
                                      ifelse(`p_adj` < 0.01, "**", 
                                             ifelse(`p_adj` < 0.05, "*", "ns"))))
-View(t_test_go_process)
+# View(t_test_go_process)
 
 
 
@@ -138,12 +146,12 @@ go_process_summary <- go_process_aggregated %>%
 go_process_summary$time_point <- factor(go_process_summary$time_point, levels = unique(go_process_summary$time_point))
 go_process_summary$condition <- factor(go_process_summary$condition, levels = c("SHAM", "ORAB"))
 
-View(go_process_summary)
+# View(go_process_summary)
 
 
 # Use p.adj from t-test
 ####################################################################
-View(t_test_go_process)
+# View(t_test_go_process)
 
 p_adj_value <- t_test_go_process %>%
   filter(process == go_process_of_interest) %>%
@@ -152,7 +160,7 @@ p_adj_value <- t_test_go_process %>%
 go_process_summary <- go_process_summary %>%
   left_join(p_adj_value, by = c("time_point", "process"))
 
-View(go_process_summary)
+# View(go_process_summary)
 
 # Go to create plot:
 file.edit("C:/Users/siljeew/Master_project/snRNAseq/Visualization/create_barplot_go_process.R")

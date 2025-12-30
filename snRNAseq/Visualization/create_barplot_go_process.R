@@ -36,8 +36,8 @@ generate_plot <- function(summary_data, significance_data, go_process_of_interes
   go_plot <- ggplot(summary_data, aes(x = time_point, y = mean_expression, fill = condition)) +
     geom_bar(stat = "identity", width = 0.5, position = position_dodge()) +
     labs(x = NULL, 
-         y = "Mean Expression Level",
-         title = "Tricarboxylic Acid Cycle",
+         y = "Mean expression level",
+         title = "Glycolysis",
          fill = "Condition") +
     theme_classic() +
     scale_fill_manual(values = c("SHAM" = "grey22", "ORAB" = "coral")) +
@@ -61,23 +61,39 @@ generate_plot <- function(summary_data, significance_data, go_process_of_interes
 # go_plot_fatty_acid_uptake <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
 # print(go_plot_fatty_acid_uptake)
 # go_process_summary_fatty_acid_uptake <- go_process_summary
-
+# go_process_summary <- go_process_summary_fatty_acid_uptake
+ 
 # go_plot_b_oxidation <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
 # print(go_plot_b_oxidation)
 # go_process_summary_b_oxidation <- go_process_summary
 
+# go_plot_glucose_uptake <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
+# print(go_plot_glucose_uptake)
+# go_process_summary_glucose_uptake <- go_process_summary
 
-# go_plot_ketone_catabolism <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
-# print(go_plot_ketone_catabolism)
+go_plot_glycolysis <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
+print(go_plot_glycolysis)
+go_process_summary_glycolysis <- go_process_summary
+
+# go_plot_pdh <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
+# print(go_plot_pdh)
+# go_process_summary_pdh <- go_process_summary
+
+
+
 
 # go_plot_hydroxybutyrate_dehydrogenase <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
 # print(go_plot_hydroxybutyrate_dehydrogenase)
+# go_process_summary_hydroxy <- go_process_summary
+
 
 # go_plot_ketone_catabolism <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
 # print(go_plot_ketone_catabolism)
 
-go_plot_tca <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
-print(go_plot_tca)
+# go_plot_tca <- generate_plot(go_process_summary, go_process_summary, go_process_of_interest)
+# print(go_plot_tca)
+# go_process_summary_tca <- go_process_summary
+
 
 
 # ggsave(file.path(output_dir_plot, paste(go_process_of_interest, ".png", sep = "")), plot = go_plot_cardiac_muscle_growth, width = 8, height = 6)
